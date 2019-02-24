@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+    /* 求1-100的累加值，遇到个位为3的跳过 */
+    // 循环式
+    for(var i = 1,getSum = 0; i <= 100; i++){
+        if(i%10 == 3){
+            // console.log(i);     /* 检验是否是个位为3 */
+            continue;
+        }else{
+            getSum += i;
+        }
+    }
+    console.log(getSum);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

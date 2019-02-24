@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+    // 求两个数的最大值
+    // 循环式
+    /* 
+    // 初始化变量
+    var num1 = parseInt(prompt("请输入第一个数："));
+    var num2 = parseInt(prompt("请输入第二个数："));
+    console.log("你输入的两个值为：" + num1 + "和" + num2);
+    console.log("其中较大的是");
+    if(num1 > num2){
+        console.log("第一个数:" + num1);
+    }else if(num1 == num2){
+        console.log("两个数相等");   
+    }else{
+        console.log("第二个数:" + num2);        
+    } 
+    */
+    // 函数式
+    /* function getMax(x,y){
+        return x>y?x:y;
+    } */
+
+    // 求两个数的最小值
+    // 函数式
+/* 
+    function getMin(x,y){
+        return x<y?x:y;
+    }
+     */
+    // 测试
+    /* 
+    var x = parseInt(prompt("第一个数:")),
+        y = parseInt(prompt("第二个数:"));
+    // console.log(getMax(x,y));
+    console.log(getMin(x,y));
+    */
+    // 求两个数的中的最大值结束
+
+    /* 
+    // 求三个数中的最大值开始
+    // 函数式
+    function getThreeMax(x,y,z){
+        return x>y?(x>z?x:z):(y>z?y:z);
+    }
+    // 测试
+    console.log(getThreeMax(10,5,20));
+    // 求三个数中的最大值结束
+     */
+
+    /* 
+    // 判断一个数是否是素数开始
+    function isPrimeNumber(num){
+        for(var i = 2 ; i < num ; i++){
+            if(num % i == 0){
+                return false;
+            }//end if
+        } //end for
+        return true;
+    }
+    // 测试
+    // var num = parseInt(prompt("请输入数字："));
+    // console.log(isPrimeNumber(num));
+    console.log(isPrimeNumber(parseInt(prompt("请输入数字："))));
+    // 判断一个数是否是素数结束
+    */
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

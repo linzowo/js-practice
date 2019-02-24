@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>构造函数练习2</title>
+    <script>
+    // 电脑对象，有颜色，重量，品牌，型号，可以看电影，听音乐，打游戏，敲代码
+    // 构造函数
+        var computer = new Object();
+        computer.color = "red";
+        computer.weight = 20;
+        computer.brand = "dell";
+        computer.type = "s110";
+        computer.movie = function (){
+            console.log("此电脑可以看电影。");
+        }
+        computer.music = function (){
+            console.log("此电脑可以听音乐。");
+        }
+        computer.game = function (){
+            console.log("此电脑可以打游戏。");
+        }
+        computer.code = function (){
+            console.log("此电脑可以敲代码。");
+        }
+    // 测试
+        console.log(computer.color);
+        console.log(computer.weight);
+        console.log(computer.brand);
+        console.log(computer.type);
+        computer.movie();
+        computer.music();
+        computer.game();
+        computer.code();
+        console.log(typeof(computer));
+    // 自定义构造函数
+        function Computer(color,weight,brand,type){
+            this.color = color;
+            this.weight = weight;
+            this.brand = brand;
+            this.type = type;
+            this.movie = function (){
+                console.log("此电脑可以看电影。");
+            }
+            this.music = function(){
+                console.log("此电脑可以听音乐。");
+            }
+            this.game = function (){
+                console.log("此电脑可以打游戏。");
+            }
+            this.code = function (){
+                console.log("此电脑可以敲代码。");
+            }
+        }
+    // 测试
+        var computer2 = new Computer("bule",15,"acre","s111");
+        console.log(computer2.color);
+        console.log(computer2.weight);
+        console.log(computer2.brand);
+        console.log(computer2.type);
+        computer2.movie();
+        computer2.music();
+        computer2.game();
+        computer2.code();
+        console.log(typeof(computer2));
+        console.log(computer2 instanceof Computer);
+    // 字面量
+        var computer3 = {
+            "color":"yellow",
+            "weight":10,
+            "brand":"ms",
+            "type":"s112",
+            "movie":function(){
+                console.log("此电脑可以看电影。");
+            },
+            "music":function(){
+                console.log("此电脑可以听音乐。");
+            },
+            "game":function(){
+                console.log("此电脑可以打游戏。");
+            },
+            "code":function(){
+                console.log("此电脑可以敲代码。");
+            }
+        }
+    // 测试
+        console.log(computer3.color);
+        console.log(computer3.weight);
+        console.log(computer3.brand);
+        console.log(computer3.type);
+        computer3.movie();
+        computer3.music();
+        computer3.game();
+        computer3.code();
+        console.log(typeof(computer3));
+    
+
+    // 工厂模式
+        function creatComputer(color,weight,brand,type){
+            var computer = new Object();
+            computer.color = color;
+            computer.weight = weight;
+            computer.brand = brand;
+            computer.type = type;
+            computer.movie = function (){
+                console.log("此电脑可以看电影。");
+            }
+            computer.music = function (){
+                console.log("此电脑可以听音乐。");
+            }
+            computer.game = function (){
+                console.log("此电脑可以打游戏。");
+            }
+            computer.code = function (){
+                console.log("此电脑可以敲代码。");
+            }
+            return computer;
+        }
+    // 测试
+        var computer4 = creatComputer("green",3,"xiaomi","mi9");
+        console.log(computer4.color);
+        console.log(computer4.weight);
+        console.log(computer4.brand);
+        console.log(computer4.type);
+        computer4.movie();
+        computer4.music();
+        computer4.game();
+        computer4.code();
+        console.log(typeof(computer4));
+
+    // 创建按钮对象，宽，高，背景颜色，点击行为，按钮有鼠标进入行为
+    // 构造函数
+        var btn1 = new Object();
+        btn1.width = 50;
+        btn1.hight = 50;
+        btn1.bgc = "red";
+        btn1.click = function(){
+            console.log("点击我");
+        }
+        btn1.mouseIn = function(){
+            console.log("鼠标进入按钮");
+        } 
+    // 测试
+        console.log(btn1.width);
+        console.log(btn1.hight);
+        console.log(btn1.bgc);
+        btn1.click();
+        btn1.mouseIn();
+    // 自定义构造函数
+        function Button(width,hight,bgc){
+            this.width = width;
+            this.hight = hight;
+            this.bgc = bgc;
+            this.click = function(){
+                console.log("点击我");
+            }
+            this.mouseIn = function(){
+                console.log("鼠标进入按钮");
+            }
+        }
+    // 测试
+        var btn2 = new Button(40,40,"bule");
+        console.log(btn2.width);
+        console.log(btn2.hight);
+        console.log(btn2.bgc);
+        btn2.click();
+        btn2.mouseIn();
+        console.log(btn2 instanceof Button);
+
+    // 字面量
+        var btn3 = {
+            "width":20,
+            "hight":20,
+            "bgc":"yellow",
+            "click":function(){
+                console.log("点击我");
+            },
+            "mouseIn":function(){
+                console.log("鼠标进入按钮");
+            },
+        }
+    // 测试
+        console.log(btn3.width);
+        console.log(btn3.hight);
+        console.log(btn3.bgc);
+        btn3.click();
+        btn3.mouseIn();
+
+    // 工厂模式
+        function creatButton(width,hight,bgc){
+            var btn = new Object();
+            btn.width = width;
+            btn.hight = hight;
+            btn.bgc = bgc;
+            btn.click = function(){
+                console.log("点击我");
+            }
+            btn.mouseIn = function(){
+                console.log("鼠标进入按钮");
+            }
+            return btn;
+        }
+    // 测试
+        var btn4 = creatButton(10,10,"green");
+        console.log(btn4.width);
+        console.log(btn4.hight);
+        console.log(btn4.bgc);
+        btn4.click();
+        btn4.mouseIn();
+    // 车对象，重量，颜色，牌子，可以载人，拉货
+    // 构造函数
+        var car1 = new Object();
+        car1.weight = 500;
+        car1.color = "red";
+        car1.brand = "bmw";
+        car1.ride = function(){
+            console.log("这辆车可以乘坐");
+        }
+        car1.freight = function(){
+            console.log("这辆车可以运货");
+        }
+    // 测试
+        console.log(car1.weight);
+        console.log(car1.color);
+        console.log(car1.brand);
+        car1.ride();
+        car1.freight();
+    // 自定义构造函数
+        function Car(weight,color,brand){
+            this.weight = weight;
+            this.color = color;
+            this.brand = brand;
+            this.ride = function(){
+                console.log("这辆车可以乘坐");
+            }
+            this.freight = function(){
+                console.log("这辆车可以运货");
+            }
+        }
+    // 测试
+        var car2 = new Car(400,"blue","benz");
+        console.log(car2.weight);
+        console.log(car2.color);
+        console.log(car2.brand);
+        car2.ride();
+        car2.freight();
+        console.log(car2 instanceof Car);
+    // 字面量
+        var car3 = {
+            "weight":300,
+            "color":"yellow",
+            "brand":"audi",
+            "ride":function(){
+                console.log("这辆车可以乘坐");
+            },
+            "freight":function(){
+                console.log("这辆车可以运货");
+            },
+        }
+    // 测试
+        console.log(car3.weight);
+        console.log(car3.color);
+        console.log(car3.brand);
+        car3.ride();
+        car3.freight();
+
+    // 工厂模式
+        function creatCar(weight,color,brand){
+            var car = new Object();
+            car.weight = weight;
+            car.color = color;
+            car.brand = brand;
+            car.ride = function(){
+                console.log("这辆车可以乘坐");
+            }
+            car.freight = function(){
+                console.log("这辆车可以运货");
+            }
+            return car;
+        }
+    // 测试
+        var car4 = creatCar(200,"green","tesla");
+        console.log(car4.weight);
+        console.log(car4.color);
+        console.log(car4.brand);
+        car4.ride();
+        car4.freight();
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

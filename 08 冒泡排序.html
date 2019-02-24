@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+    /*
+    *冒泡排序算法练习
+    * 作用将一个无序的数组快速排序
+    * 算法步骤
+    * 初始化数组、比较变量num
+    * for循环遍历
+    * 
+    * 
+    * 
+    * 
+    * 
+    * 
+    * 
+    */
+    /*
+    while 循环法
+     function bubbleSort(arr){
+        var i = arr.length , j;
+        var num;
+        while(i > 0){
+            for(j = 0; j < i-1; j++){
+                if(arr[j] > arr[j + 1]){
+                    num = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = num;
+                }
+            }
+            i--;
+        }
+        return arr;
+    } */
+    // for循环法
+    function bubbleSort(arr){
+        var num;
+        for(var i = arr.length-1; i > 0; i--){
+            for(var j = 0; j < i; j++){
+                if(arr[j] > arr[j+1]){
+                    num = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = num;
+                }//endif
+            }//endfor
+        }//endfor
+        return arr;
+    }
+    testArr = [1,5,7,9,3,10,8,6,4,2];
+    console.log(bubbleSort(testArr));
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

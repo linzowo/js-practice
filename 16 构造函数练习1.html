@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>构造函数练习1</title>
+    <script>
+    // 一个图片的构造函数
+    // 创建构造函数
+    function Picture(width,high,size,content){
+        this.width = width;
+        this.high = high;
+        this.size = size.toString()+"M";
+        this.show = function (){
+            console.log("这是一张关于"+content+"的照片。");
+        }
+    }
+    // 使用构造函数创建对象
+    var pic = new Picture(20,20,4,"狗")
+    // 测试
+    console.log(pic.width);
+    console.log(pic.high);
+    console.log(pic.size);
+    console.log(pic instanceof Object);     //true js中的对象都继承object
+    console.log(pic instanceof Picture);
+    pic.show();
+
+    // 一只猫的构造函数
+    // 创建构造函数
+    function Cat(name,color,weight,age){
+        this.name = name;
+        this.color = color;
+        this.weight = weight;
+        this.age = age;
+        this.work = function (){
+            console.log(name+"可以抓老鼠。");
+        }
+        this.fight = function (){
+            console.log(name+"喜欢和狗打架。");
+        }
+    }
+    // 使用构造函数创建对象
+    var cat = new Cat("小黄","彩色的黑",12,12);
+    // 测试
+    console.log(cat.name);
+    console.log(cat.color);
+    console.log(cat.weight);
+    console.log(cat.age);
+    cat.work();
+    cat.fight();
+    console.log(cat instanceof Object);
+    console.log(cat instanceof Cat);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

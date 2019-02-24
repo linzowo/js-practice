@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+    /*
+    *用户输入班级人数
+    *求总成绩
+    *平均值
+    *最高分
+    *最低分
+    修改一个数据防止删除
+    */
+    // 声明变量
+    var arr = [],   /* 声明存储分数的数组 */
+        sum = 0,    /* 声明存储总分数的变量 */
+        mean = 0,   /* 平均值变量 */
+        max = 0,    /* 最大值 */
+        min = 1000;    /* 最小值 */
+
+    var classSize = parseInt(prompt("请输入班级人数："));       /* 弹窗式获取用户输入 */
+    // 存储班级分数
+    for(var i = 0,score; i < classSize; i++){
+        score = parseInt(prompt("请输入成绩："));
+        arr.push(score);
+    };
+    // 计算总和，最大值，最小值
+    for(var i = 0; i<arr.length; i++){
+        sum += arr[i];
+        if(arr[i] > max){
+            max = arr[i];
+        }if(arr[i] < min){
+            min = arr[i];
+        };
+    };
+    // 计算平均值
+    mean = sum/classSize;
+    // 输出数据
+    console.log("班级人数为："+classSize+"人\n"+"总分数为："+sum+"\n平均分为："+mean+"\n最高分："+max+"\n最低分："+min);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>九九乘法表</title>
+    <script>
+        // document.write("hello wrold");
+        // 基本循环结构
+        // for(var i = 1;i<=9;i++){
+        //     for(var j=1;j<=9;j++){
+        //         document.write(i+"*"+j+"="+i*j)
+        //     }
+        //     document.write("<br/>")
+        // }
+        // 添加表格
+        document.write("<table border='1'>")
+        for(var i = 1;i<=9;i++){
+            document.write("<tr>")
+            for(var j=1;j<=i;j++){
+                document.write("<td>")
+                document.write(j+"*"+i+"="+i*j)
+                document.write("</td>")
+            }
+            document.write("</tr>")
+            // document.write("<br/>")
+        }
+        document.write("</table>")
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

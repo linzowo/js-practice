@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+    /* 求1-100之间不能被7整除的整数的和 */
+    for(var i = 1 , getSum = 0; i <= 100; i++){
+        if(i % 7 == 0){
+            // console.log(i);     /* 检验是否能被7整除 */
+            continue;
+        }else{
+            getSum += i;
+        }
+    }
+    console.log(getSum);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

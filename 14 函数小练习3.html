@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数小练习3</title>
+    <script>
+
+/*     // 求阶乘
+    function getFactorial(num){
+        var fac = 1;
+        for(var i = 1; i <= num; i++){
+            fac*=i;
+        }
+        return fac;
+    }
+    // 测试
+    console.log(getFactorial(5));
+*/   
+/* 
+    // 求斐波那契数列和
+    // 获取斐波那契数
+    function getFibonacciNum(num){
+        var fibNum = 0,
+            num1 = 1,
+            num2 = 1;
+        if(num == 1||num == 2){
+            return 1;
+        }
+        for(var i=2; i<num; i++){
+            fibNum = num1 + num2;
+            num1 = num2;
+            num2 = fibNum;
+        }
+        return fibNum;
+    }
+    // 测试 getFibonacciNum
+    // console.log(getFibonacciNum(parseInt(prompt("获取第几个数："))));
+    // 求和
+    function getFibonacciSum(num){
+        var sum = 0;
+        for(var i = 1; i <= num; i++){
+            sum += getFibonacciNum(i);
+        }
+        return sum;
+    }
+    // 测试
+    console.log(getFibonacciSum(6));
+*/
+
+    // 输入年月日获取是这一年的第几天
+    // 输入：year month day
+    // 输出： 天数（这一年的第几天）
+    // 闰年多一天
+    // 判断闰年
+    // 每个月的天数 使用数列
+    function getDays(year,month,day){
+        var days = day,
+            everyMonthDays = [31,28,31,30,31,30,31,31,30,31,30,31];
+        if(month == 1){
+            return days;
+        }//end if
+        for(var i = 0; i < month-1; i++){
+            days += everyMonthDays[i];
+        }//end for
+        if(year%4 == 0&&year%100 != 0||year%400 == 0){
+            days += 1;
+        }//end if
+        return days;
+    }
+    // 测试
+    console.log(getDays(2001,3,20));
+    
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
