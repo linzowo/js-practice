@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>19 DOM1 点击图片显示大图</title>
+    <style>
+        img{
+            width: 100px;
+        }
+    </style>
+    <script>
+        var my$ = function(id){
+            return document.getElementById(id);
+        }
+    </script>
+</head>
+<body>
+    <img src="images/longjuan.jpg" alt="龙卷" id="im">
+
+    <script>
+        my$("im").onclick = function(){
+            my$("im").style.width = "500px";
+        }
+    </script>
+</body>
+</html>

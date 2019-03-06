@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改所有文本框内容</title>
+    <script>
+        var my$ = function(id){
+            return document.getElementById(id);
+        }
+    </script>
+</head>
+<body>
+    <input type="text" value="你输入内容啊！" /><br />
+    <input type="text" value="你输入内容啊！" /><br />
+    <input type="text" value="你输入内容啊！" /><br />
+    <input type="text" value="你输入内容啊！" /><br />
+    <input type="text" value="你输入内容啊！" /><br />
+    <input type="text" value="你输入内容啊！" /><br />
+
+    <input type="button" name="" id="btn" value="按我改变他们" />
+
+    <script>
+        my$("btn").onclick = function(){
+            var textObjs = document.getElementsByTagName("input");
+            for(var i = 0;i<textObjs.length;i++){
+                if(textObjs[i].type == "text"){
+                    textObjs[i].value = "我就不输入你把我怎么样。";
+                }// end if 
+            }// end for
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+
++<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>点击图片显示对话框</title>
+    <script>
+        var my$ = function(id){
+            return document.getElementById(id);
+        }
+    </script>
+</head>
+<body>
+    <img src="images/jieluoshi.jpeg" alt="杰洛士" id="im">
+    <img src="images/longjuan.jpg" alt="龙卷">
+    <img src="images/yiquan.jpeg" alt="一拳">
+
+    <script>
+        console.log(my$("im").alt);
+        console.log(typeof(my$("im").alt));
+        var imgObjs = document.getElementsByTagName("img");
+        console.log(imgObjs);
+        // imgObjs[0].onclick = function(){
+        //     console.log(imgObjs[0].alt);
+        //     alert(imgObjs[0].alt);
+        // }
+        for(var i=0;i<imgObjs.length;i++){
+            imgObjs[i].onclick = function(){
+                alert(this.alt);
+            };
+        }
+    </script>
+</body>
+</html>
