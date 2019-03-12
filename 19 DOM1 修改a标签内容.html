@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>19 DOM1 修改a标签内容</title>
+    <script src="common.js"></script>
+</head>
+<body>
+    <!-- <input type="button" name="" id="btn" value="按我改变a">
+    <a href="#" id="a1">这是一个没卵用的链接</a>
+    <script>
+        var my$ = function(id){
+            return document.getElementById(id);
+        };
+        my$("btn").onclick = function(){
+            my$("a1").innerText = "现在他们有用了";
+            my$("a1").href = "http://www.baidu.com";
+        }
+    </script> -->
+    <input type="button" name="" id="btn" value="改变a"/>
+    <a href="#" id="a1">这是一个没有卵用的链接</a>
+    <script>
+        my$("btn").onclick = function(){
+            my$("a1").innerText = "去百度吧";
+            my$("a1").href = "http://www.baidu.com";
+        }
+    </script>
+
+</body>
+</html>

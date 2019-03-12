@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>19 DOM1 修改多个p标签内容</title>
+    <script src="common.js"></script>
+</head>
+<body>
+    <!-- <input type="button" name="" id="btn" value="改变多个p">
+    <p>这个是p</p>
+    <p>这个是p</p>
+    <p>这个是p</p>
+    <p>这个是p</p>
+    <p>这个是p</p>
+    <p>这个是p</p>
+
+    <script>
+        my$("btn").onclick = function(){
+            var pObjs = document.getElementsByTagName("p");     //获取一个p标签对象组成的伪数组
+            for(var i =0;i<pObjs.length;i++){
+                pObjs[i].innerText = "哈哈 我还是原来那个p";
+            }
+        }
+    </script> -->
+    <input type="button" name="" id="btn" value="安慰">
+    <p>我是小p</p>
+    <p>我是小p</p>
+    <p>我是小p</p>
+    <p>我是小p</p>
+    <p>我是小p</p>
+    <p>我是小p</p>
+    
+    <script>
+        my$("btn").onclick = function(){
+            var pObjs = document.getElementsByTagName("p");
+            for(var key in pObjs){
+                pObjs[key].innerText = "我是大P";
+            }
+        };
+    </script>
+</body>
+</html>

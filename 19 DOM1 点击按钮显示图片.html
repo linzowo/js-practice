@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>19 DOM1 点击按钮显示图片</title>
+</head>
+<body>
+    <input type="button" value="显示图片" id="btn" />
+    <img src="images/yiquan.jpg" alt="一拳超人" id="im" style="display:none" />
+    <script>
+        // document.getElementById("btn").onclick = function(){
+        //     if(document.getElementById("btn").value == "显示图片"){
+        //         document.getElementById("im").style.display = "";
+        //         document.getElementById("btn").value = "隐藏图片";
+        //     }else if(document.getElementById("btn").value == "隐藏图片"){
+        //         document.getElementById("im").style.display = "none";
+        //         document.getElementById("btn").value = "显示图片";
+        //     }
+        // };
+        var my$ = function(id){
+            return document.getElementById(id);
+        };
+        my$("btn").onclick = function(){
+            // var dpyObj = my$("im").style.display;        使用变量存储的dom元素无法实时更改
+            if(my$("im").style.display=="none"){
+                my$("im").style.display = "";
+                my$("btn").value="隐藏图片";
+            }else if(my$("im").style.display==""){
+                my$("im").style.display = "none";
+                my$("btn").value = "显示图片";
+            }
+        }
+    </script>
+</body>
+</html>
