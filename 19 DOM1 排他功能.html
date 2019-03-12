@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>排他功能</title>
+    <style>
+        li{
+            list-style: none;
+            float: left;
+            margin:0 5px;
+            width: 30px;
+            height: 20px;
+            border: 1px solid #000;
+        }
+        .cls {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <ul id="uu">
+        <li class="cls"></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+
+    <script>
+        // 获取要操作的元素是列表
+        // var lists=document.getElementsByName("ul");
+        var lists = document.getElementById("uu").getElementsByTagName("li");       //getElementsByTagName无法跨层级直接获取子元素，必须先获取父元素
+        console.log(lists);
+        // 为每个标签注册点击事件
+        for(var i = 0;i<lists.length;i++){
+            lists[i].onmouseover = function (){
+                console.log("hh");
+                // 将所有标签的类样式去掉
+                for(var j = 0;j<lists.length;j++){
+                    lists[j].removeAttribute("class");
+                }// end for
+                // 为点击的元素添加类样式
+                this.className = "cls";
+            }
+            lists[i].onmouseout = function(){
+                console.log("xx")
+            }
+        }
+        // 为每个li标签注册鼠标进入事件
+
+        // 为每个li标签注册离开事件
+    </script>
+</body>
+</html>

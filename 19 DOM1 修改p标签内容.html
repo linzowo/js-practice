@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>19 DOM1 修改p标签内容</title>
+</head>
+<body>
+    <!-- <input type="button" name="" id="btn" value="按我改p" />
+    <p id="p1">这是个p</p>
+    <script>
+        var my$ = function(id){
+            return document.getElementById(id)
+        };
+        my$("btn").onclick = function() {
+            my$("p1").innerText = "这还是个p";
+        } -->
+        <input type="button" name="" id="btn" value="按我吧" />
+        <p id="p2">这是另外一个p</p>
+        <script>
+        var my$ = function(id){
+            return document.getElementById(id)
+        };
+        my$("btn").onclick = function(){
+            my$("p2").innerText = "啊 我还是个p";
+        };
+        </script>
+    </script>
+</body>
+</html>

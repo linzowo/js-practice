@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>19 DOM1 点击按钮弹出对话框</title>
+</head>
+<body>
+    <input type="button" value="按我" id="btn" />
+    <script>
+        var my$ = function(id){
+            return document.getElementById(id);
+        }
+        // document.getElementById("btn").onclick = function(){
+        //     alert("你来了");
+        // }
+        my$("btn").onclick = function(){
+            alert("你又来了");
+        }
+    </script>
+</body>
+</html>
