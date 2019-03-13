@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片相册</title>
+    <style>
+        ul {
+            overflow: hidden;   /* 清除浮动 */
+        }
+        li {
+            list-style: none;
+            float: left;
+            margin: 0 5px;
+        }
+        li img {
+            width: 200px;
+        }
+        div {
+            width: 500px;
+            height: 300px;
+            border: 1px double red;
+
+        }
+        div img {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <ul id="uu">
+        <li><img src="images/hz1.jpg" alt="" title="海贼王1"></li>
+        <li><img src="images/hz2.jpg" alt="" title="海贼王2"></li>
+        <li><img src="images/hz3.jpg" alt="" title="海贼王3"></li>
+        <li><img src="images/hz4.jpg" alt="" title="海贼王4"></li>
+    </ul>
+    <div ><img src="" alt="" id="dvimg"></div>
+    <p id="p1">图片名称</p>
+
+    <script>
+        // 点击图片，该图片以大图的形式在div中显示
+        // 获取图片元素所在的列表
+        var uu = document.getElementById("uu");
+        var imgObjs = uu.getElementsByTagName("img");
+        // console.log(imgObjs);
+        // 获取div和p元素
+        var dvimg = document.getElementById("dvimg");
+        var p1 = document.getElementById("p1");
+        // 为每张图片注册点击事件
+        for(var i =0;i<imgObjs.length;i++){
+            imgObjs[i].onclick = function(){
+            // 获取img元素的src属性的值
+                dvimg.src = this.src;
+                // 获取img元素的title的值
+                p1.innerHTML = this.title;
+            }
+        }// end for
+        
+        
+    </script>
+</body>
+</html>
