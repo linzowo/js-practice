@@ -31,11 +31,11 @@
         // 获取要操作的元素是列表
         // var lists=document.getElementsByName("ul");
         var lists = document.getElementById("uu").getElementsByTagName("li");       //getElementsByTagName无法跨层级直接获取子元素，必须先获取父元素
-        console.log(lists);
+        // console.log(lists);
         // 为每个标签注册点击事件
         for(var i = 0;i<lists.length;i++){
             lists[i].onmouseover = function (){
-                console.log("hh");
+                // console.log("hh");
                 // 将所有标签的类样式去掉
                 for(var j = 0;j<lists.length;j++){
                     lists[j].removeAttribute("class");
@@ -43,13 +43,10 @@
                 // 为点击的元素添加类样式
                 this.className = "cls";
             }
-            lists[i].onmouseout = function(){
-                console.log("xx")
-            }
+            // lists[i].onmouseout = function(){
+            //     console.log("xx")
+            // }
         }
-        // 为每个li标签注册鼠标进入事件
-
-        // 为每个li标签注册离开事件
     </script>
 </body>
 </html>

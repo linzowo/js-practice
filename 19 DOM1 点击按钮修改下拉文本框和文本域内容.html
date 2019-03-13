@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片相册</title>
+    
+</head>
+<body>
+    <input type="button" name="" id="btn1" value="点餐"/>
+    <select name="" id="ss">
+        <option value="1">蛋炒饭</option>
+        <option value="2">土豆丝</option>
+        <option value="3">洋芋丝</option>
+        <option value="4">地瓜丝</option>
+        <option value="5" id="cd">番茄操蛋</option>
+    </select>
+    <textarea name="" id="ta" cols="30" rows="10">
+        我的写作水平终于获得了语文老师的认可。三年前，他对我的评语是“无病呻吟”。三年后，我又把新写的作品拿给他，看完后他关切地对我说：“你有病吧。”
+    </textarea>
+    <input type="button" name="" id="btn2" value="注册" />
+
+    <script>
+    // 注册btn1点击事件
+    var btn1 = document.getElementById("btn1");
+    btn1.onclick = function(){
+        document.getElementById("ss").getElementById("cd").selected = true;
+    }
+    // 注册btn1点击事件
+    var btn2 = document.getElementById("btn2");
+    btn2.onclick = function(){
+        document.getElementById("ta").value="哈哈";
+    }
+    </script>
+</body>
+</html>
