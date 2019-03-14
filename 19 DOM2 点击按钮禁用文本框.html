@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>点击按钮禁用文本框</title>
+    
+</head>
+<body>
+    <input type="button" id="btn1" value="按我啊"/>
+    <textarea name="" id="ta" cols="30" rows="10">
+        嘿嘿嘿
+    </textarea>
+
+    <script>
+    // 获取按钮
+    var btn = document.getElementById("btn1");
+    // 获取文本域
+    var txtA = document.getElementById("ta");
+    // 为按钮注册点击事件
+    btn.onclick = function (){
+        txtA.disabled = true;       //textarea是html5的标签，禁用属性为disable
+    }
+    </script>
+</body>
+</html>
