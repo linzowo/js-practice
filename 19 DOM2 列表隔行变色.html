@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>点击图片超链接显示大图</title>
+    <script>
+        var my$ = function(id){
+            return document.getElementById(id);
+        }
+    </script>
+    <style>
+        .yell {
+            background-color: yellow;
+        }
+        .re {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <input type="button" name="" id="btn" value="变色" />
+    <ul id="uu">
+        <li>单行1</li>
+        <li>单行2</li>
+        <li>单行3</li>
+        <li>单行4</li>
+        <li>单行5</li>
+        <li>单行6</li>
+    </ul>
+
+    <script>
+        var lists = my$("uu").getElementsByTagName("li");
+        my$("btn").onclick = function(){
+            for(var i =0;i<lists.length;i++){
+                if((i+1)%2==0){
+                    lists[i].className = "yell";
+                }else{
+                    lists[i].className = "re";
+                }
+            }
+        }
+    </script>
+</body>
+</html>

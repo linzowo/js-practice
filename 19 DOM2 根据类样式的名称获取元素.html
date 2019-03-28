@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>根据类样式的名称获取元素</title>
+    <script>
+        var my$ = function(id){
+            return document.getElementById(id);
+        }
+    </script>
+    <style>
+        .cls1{
+            background-color: yellow;
+        }
+        .cls2 {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <input type="button" name="" value="修改类样式" id="btn"/>
+    <p>这是一个p</p>
+    <p class="cls1">这是另一个p</p>
+    <span>这是一个span</span>
+    <span class="cls1">这是另一个span</span>
+    <div>这是一个div</div>
+    <div class="cls1">这是另一个div</div>
+
+    <script>
+        // 获取类样式名称为cls1的元素
+        var clslist = document.getElementsByClassName("cls1");
+        console.log(clslist);
+        // 响应按键点击事件时变更类样式
+        my$("btn").onclick = function(){
+            for(var i =0;i<clslist.length;i++){
+                clslist[i].style.backgroundColor = "red";
+                // clslist[i].className = "cls2";  无法对span标签生效，原因暂时不清楚
+            }
+        };
+    </script>
+</body>
+</html>

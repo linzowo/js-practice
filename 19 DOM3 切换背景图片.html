@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>点击切换背景图片</title>
+    <script>
+        var my$ = function(id){
+            return document.getElementById(id);
+        }
+    </script>
+    <style>
+        div{
+            margin-top: 10px;
+            width: 100%;
+            height: 100px;
+            background-color: rgba(255,255,255,.3);
+            padding-left: 300px;
+        }
+        img{
+            float: left;
+            height: 100%;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="dv">
+        <img src="images/hz1.jpg" alt="海贼王1" />
+        <img src="images/hz2.jpg" alt="海贼王2" />
+        <img src="images/hz3.jpg" alt="海贼王3" />
+        <img src="images/hz4.jpg" alt="海贼王4" />
+    </div>
+
+    <script>
+        // 获取需要注册事件的元素
+        var imgObjs = my$("dv").getElementsByTagName("img");
+        // 为每个元素注册点击事件
+        for(var i = 0;i < imgObjs.length;i++){
+            imgObjs[i].onclick = function(){
+                document.body.style.backgroundImage = "url("+this.src+")";
+            };
+        }
+    </script>
+</body>
+</html>

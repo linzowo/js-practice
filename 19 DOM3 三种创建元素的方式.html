@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>点击切换背景图片</title>
+    <script>
+        var my$ = function(id){
+            return document.getElementById(id);
+        }
+    </script>
+    <style>
+        div{
+            width: 200px;
+            height: 100px;
+            border: 1px solid gold;
+        }
+    </style>
+</head>
+<body>
+    <div id="dv"></div>
+    <input type="button" id="btn1" value="write"/>
+    <input type="button" id="btn2" value="innerHtml"/>
+    <input type="button" id="btn3" value="create"/>
+
+    <script>
+        // document.write的方式
+        my$("btn1").onclick = function (){
+            document.write("<p>write的方式创建p元素</p>");
+        }
+        // innerHtml的方式创建
+        my$("btn2").onclick = function (){
+            my$("dv").innerHTML = "<p>innerHtml的方式创建p元素</p>";
+        }
+        // createElement的方式
+        my$("btn3").onclick = function(){
+            // 创建该元素
+            var newP = document.createElement("p");
+            // 为元素追加内容
+            newP.innerHTML = "createElement的方式创建p元素";
+            // 将完整的该元素添加到需要的元素内
+            my$("dv").appendChild(newP);
+        }
+    </script>
+</body>
+</html>

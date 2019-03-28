@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>超链接轮换相册</title>
+    <script>
+        var my$ = function(id){
+            return document.getElementById(id);
+        }
+    </script>
+    <style>
+        ul{
+            overflow: hidden;
+        }
+        li{
+            float: left;
+            list-style: none;
+            margin-right: 5px;
+        }
+        div {
+            width: 500px;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <h2>超链接轮换相册</h2>
+    <ul id="uu">
+        <li>
+            <a href="images/hz1.jpg">
+                <img src="images/hz1.jpg" alt="海贼王1" width="200"/>
+            </a>
+        </li>
+        <li>
+            <a href="images/hz2.jpg">
+                <img src="images/hz2.jpg" alt="海贼王2" width="200"/>
+            </a>
+        </li>
+        <li>
+            <a href="images/hz3.jpg">
+                <img src="images/hz3.jpg" alt="海贼王3" width="200"/>
+            </a>
+        </li>
+        <li>
+            <a href="images/hz4.jpg">
+                <img src="images/hz4.jpg" alt="海贼王4" width="200"/>
+            </a>
+        </li>
+    </ul>
+    <div><img src="" alt="" width="500" id="im"></div>
+    <p id="p1">选择一张图片</p>
+
+    <script>
+        var alist = my$("uu").getElementsByTagName("a");
+        for(var i = 0;i<alist.length;i++){
+            alist[i].onclick = function(){
+                my$("im").src = this.href;
+                // console.log(this.getElementsByTagName("img"));
+                my$("p1").innerHTML = this.getElementsByTagName("img")[0].alt;
+                return false;
+            };
+        }
+    </script>
+</body>
+</html>

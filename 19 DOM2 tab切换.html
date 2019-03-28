@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tab切换</title>
+    <script>
+        var my$ = function(id){
+            return document.getElementById(id);
+        }
+    </script>
+
+    <style>
+        .box{
+            margin: 100px auto;
+            width: 500px;
+            border: 1px solid #ccc;
+        }
+        .hd {
+            width: 100%;
+            height: 50px;
+        }
+        .hd span {
+            float: left;
+            width: 98px;
+            height: 100%;
+            text-align: center;
+            line-height: 50px;
+            border: 1px solid #000;
+            cursor: pointer;
+        }
+        .hd span.current {
+            background-color: purple;
+        }
+        .bd {
+            width: 498px;
+            height: 298px;
+            position: absolute;
+            background-color: green;
+            border: 1px solid #000;
+        }
+        .bd span {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+        .bd span.current {
+            display: block;
+            /* z-index: 1; */
+            background-color: purple;
+        }
+    </style>
+</head>
+<body>
+    <div class="box" id="box">
+        <div class="hd" id="hd">
+            <span class="current">音乐</span>
+            <span>舞蹈</span>
+            <span>电影</span>
+            <span>摄影</span>
+            <span>娱乐</span>
+        </div>
+        <div class="bd" id="bd">
+            <span class="current">音乐模块内容</span>
+            <span>舞蹈模块内容</span>
+            <span>电影模块内容</span>
+            <span>摄影模块内容</span>
+            <span>娱乐模块内容</span>
+        </div>
+    </div>
+
+    <script>
+        // 为hd下的span注册点击事件
+        // 获取bd下span标签
+        var bdspans = my$("bd").getElementsByTagName("span");
+        // console.log(bdspans);
+        // 获取hd下的span标签
+        var hdspans = my$("hd").getElementsByTagName("span");
+        // 为其注册点击事件
+        for(var i =0; i<hdspans.length;i++){
+            hdspans[i].setAttribute("index",i);
+            hdspans[i].onclick = function(){
+                // 使用排他功能保证只有被点元素具有类样式
+                // 去除所有类样式
+                for(var j=0;j<hdspans.length;j++){
+                    hdspans[j].removeAttribute("class");
+                    bdspans[j].removeAttribute("class");
+                }
+                // 为被点元素添加类样式
+                this.className = "current";
+                // 为与hd关联的bd中的span添加类样式
+                // 获取起到连接作用的索引值
+                var num = this.getAttribute("index");
+                bdspans[num].className = "current";
+            }
+        }
+    </script>
+</body>
+</html>

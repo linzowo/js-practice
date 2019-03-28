@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>根据选择器名称获取元素</title>
+    <script>
+        var my$ = function(id){
+            return document.getElementById(id);
+        }
+    </script>
+    <style>
+        .cls{
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <input type="button" name="" value="这是一个按钮" id="btn"/>
+    <div>这是一个div</div>
+    <div class="cls">这是另一个div</div>
+    <p>这是一个p</p>
+    <p class="cls">这是另一个p</p>
+    <span>这是一个span</span>
+    <span class="cls">这是另一个span</span>
+
+    <script>
+        // 通过选择器名称获取单个元素
+        document.querySelector("#btn").onclick = function(){
+            alert("nihaoa");
+        };
+        // 通过选择器名称获取多个元素
+        var clslist = document.querySelectorAll(".cls");
+        // 改变获取到的元素的背景颜色
+        for(var i =0;i<clslist.length;i++){
+            clslist[i].style.backgroundColor = "red";
+        }
+    </script>
+</body>
+</html>

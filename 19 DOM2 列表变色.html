@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>列表变色</title>
+    <style>
+        .cls {
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <input type="button" name="" id="btn" value="变色" />
+    <ul id="uu">
+        <li>张三</li>
+        <li>李四</li>
+        <li>王五</li>
+        <li>周三</li>
+        <li>周四</li>
+        <li>周五</li>
+    </ul>
+
+    <script>
+        // 获取需要操作的列表元素
+        var lists = document.getElementById("uu").getElementsByTagName("li");
+        console.log(lists);
+        document.getElementById("btn").onclick = function (){
+            for(var i =0;i<lists.length;i++){
+                lists[i].className = "cls";
+            }
+        }
+    </script>
+
+</body>
+</html>

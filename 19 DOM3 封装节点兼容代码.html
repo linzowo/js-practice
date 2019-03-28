@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>节点操作兼容代码</title>
+    <script>
+        var my$ = function(id){
+            return document.getElementById(id);
+        }
+    </script>
+</head>
+<body>
+
+    <ul id="uu">
+        <li>第一行</li>
+        <li>第二行</li>
+        <li id="three">第三行</li>
+        <li>第四行</li>
+        <li>第五行</li>
+    </ul>
+
+    <script>
+    // <!-- 第一个子节点和第一个子元素的获取代码在ie8中可能不支持 -->
+        // 其余几个代码同理，主要针对部分代码在ie8中可能不支持的情况
+
+        // 代码1 获取任意一个父级元素的第一个子元素
+        function getFirstElementChild(element){
+            if(element.firstElementChild){
+                return element.firstElementChild;
+            }else{
+                // 如果其他浏览器使用firstChild获取到的不是元素，仍然是节点的情况下，我们就需要判断其获取到的是标签还是其他类型的节点
+                var node = element.firstChild;  // 将获取到的第一个内容存储起来
+                while(node&&node.nodeType!=1){  // 如果获取到的内容不是标签就检查下一个内容
+                    node = node.nextSibling;
+                }// end while
+                return node;
+            }
+        }
+        // 代码2 获取任意一个父级元素的最后一个子元素
+        function getLastElementChild(element){
+            if(element.lastElementChild){
+                return element.lastElementChild;
+            }else{
+                var node = element.lastChild;
+                while(node&&node.nodeType!=1){
+                    node = node.previousSibling;
+                }// end while
+                return node;
+            }
+        }
+        // 代码3 获取任意一个元素的前一个兄弟元素
+        function getPreviousElement(element){
+            if(element.previousElementSibling){
+                return element.previousElementSibling;
+            }else{
+                var node = element.previousSibling;
+                while(node&&node.nodeType!=1){
+                    node = node.previousSibling;
+                }// end while
+                return node;
+            }
+        }
+        // 代码4 获取任意一个元素的后一个兄弟元素
+        function getNextElement(element){
+            if(element.nextElementSibling){
+                return element.nextElementSibling;
+            }else{
+                var node = element.nextSibling;
+                while(node&&node.nodeType!=1){
+                    node = node.nextSibling;
+                }// end while
+                return node;
+            }
+        }
+        //  代码5 获取任意一个元素的所有兄弟元素
+        function getBrotherElementAll(element){
+            var broElementList = [];
+            var preEle = getPreviousElement(element);
+            var nextEle = getNextElement(element);
+            while(preEle||nextEle){
+                if(preEle){
+                    broElementList.push(preEle)
+                    preEle = getPreviousElement(preEle);
+                }else if(nextEle){
+                    broElementList.push(nextEle);
+                    nextEle = getNextElement(nextEle);
+                }// end if
+            }// end while
+            return broElementList;
+        }
+
+        // 测试
+        // 获取任意一个父级元素的第一个子元素
+        console.log(getFirstElementChild(my$("uu")));
+        // 获取任意一个父级元素的第一个子元素
+        console.log(getLastElementChild(my$("uu")));
+        //获取任意一个元素的前一个兄弟元素
+        console.log(getPreviousElement(my$("three")));
+        //获取任意一个元素的后一个兄弟元素
+        console.log(getNextElement(my$("three")));     
+        // 获取任意一个元素的所有兄弟元素
+        console.log(getBrotherElementAll(my$("three")));
+
+
+    </script>
+
+</body>
+</html>

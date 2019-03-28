@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>判断密码长度是否符合要求</title>
+    <script>
+        var my$ = function(id){
+            return document.getElementById(id);
+        }
+    </script>
+</head>
+<body>
+    <!-- 当文本框失去焦点时判断用户输入内容长度是否在6-10之间 -->
+    <input type="text" value="" id="txt"/>
+    <script>
+        // 注册获取焦点事件
+        // my$("txt").onfocus = function(){
+        //     if()
+        // };
+        // 注册失去焦点事件
+        my$("txt").onblur = function(){
+            if(this.value.length>=6 && this.value.length<=10){
+                this.style.backgroundColor = "green";
+            }else{
+                this.style.backgroundColor = "red";
+            }
+        };  
+    </script>
+</body>
+</html>

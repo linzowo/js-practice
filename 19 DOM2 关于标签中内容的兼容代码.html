@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>封装兼容代码</title>
+    <script>
+        var my$ = function(id){
+            return document.getElementById(id);
+        }
+    </script>
+</head>
+<body>
+    <!-- 测试 -->
+    <input type="button" value="点击获取文本内容" id="btn1"/>
+    <div id="dv">
+        这是一个div
+    </div>
+    <!-- 设置文本内容 -->
+    <input type="button" value="设置文本内容" id="btn2"/>
+    <textarea id="tt" cols="30" rows="10"></textarea>
+<script>    
+        // <!-- 设置任意标签中的任意文本内容 -->
+        function setInnerText(element,text){
+            if(typeof element.innerText=="undefined"){
+                element.textContent = text;
+            }else{
+                element.innerText = text;
+            }
+        }
+
+        // <!-- 获取在意标签中间的文本内容 -->
+        function getInnerText(element){
+            if(typeof element.innerText=="undefined"){
+                return element.textContent;
+            }else{
+                return element.innerText;
+            }
+        }
+
+        // 测试部分
+        // 为两个按钮分别注册点击事件
+        // 为btn1注册获取文本内容的事件
+        my$("btn1").onclick = function(){
+            console.log(getInnerText(my$("dv")));
+        };
+        // 为btn2注册设置文本内容事件
+        my$("btn2").onclick = function(){
+            setInnerText(my$("dv"),my$("tt").value);
+        }
+    </script>
+</body>
+</html>
