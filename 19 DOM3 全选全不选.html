@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>点击切换背景图片</title>
+    <script>
+        var my$ = function(id){
+            return document.getElementById(id);
+        }
+    </script>
+    <style>
+        table{
+            margin: 100px auto;
+        }
+        th{
+            background-color: #cccc;
+            width: 100px;
+        }
+        tr {
+            text-align: center;
+        }
+        
+    </style>
+</head>
+<body>
+    <table id="tab" cellpadding="0" cellspacing="0">
+        <thead id="j_cka">
+            <tr>
+                <th>
+                    <input type="checkbox" id="ckAll"/>全选
+                </th>
+                <th>菜单</th>
+            </tr>
+        </thead>
+        <tbody id="j_ck">
+            <tr>
+                <td>
+                    <input type="checkbox"/>
+                </td>
+                <td>酸辣土豆丝</td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox"/>
+                </td>
+                <td>酸辣洋芋丝</td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox"/>
+                </td>
+                <td>酸辣地瓜丝</td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox"/>
+                </td>
+                <td>酸辣辣椒丝</td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox"/>
+                </td>
+                <td>酸辣酸辣丝</td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+        // var list = [
+        //     {"name":"百度","href":"www.baidu.com"},
+        //     {"name":"谷歌","href":"www.baidu.com"},
+        //     {"name":"搜狐","href":"www.baidu.com"},
+        //     {"name":"新浪","href":"www.baidu.com"},
+        //     {"name":"优酷","href":"www.baidu.com"}
+        // ];
+        // for(var i = 0;i<list.length;i++){
+        //     // 创建一个表格
+            
+        // }
+        var tab = my$("tab");
+        tab.border = 1;
+        // 获取需要使用的元素
+        var ckAll = my$("ckAll");
+        var ck = my$("j_ck").getElementsByTagName("input");
+        // 点击全选框的情况
+        ckAll.onclick = function(){
+            for(var i=0; i <ck.length;i++){
+                ck[i].checked = this.checked;
+            }
+        }
+        // 点击单选框的情况
+        // 每个单选框被点击时进行检查是否符合全选条件
+        // 为每个单选框注册点击事件
+        for(var j=0;j<ck.length;j++){
+            ck[j].onclick = function(){
+                for(var k=0; k<ck.length;k++){
+                    if(!ck[k].checked){
+                        ckAll.checked = "";
+                        break
+                    }// end  if
+                    ckAll.checked = true;
+                }// end for
+            }
+        }// end for
+    </script>
+</body>
+</html>

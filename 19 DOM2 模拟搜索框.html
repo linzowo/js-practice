@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模拟搜索框</title>
+    <script>
+        var my$ = function(id){
+            return document.getElementById(id);
+        }
+    </script>
+    <style>
+        input{
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" value="请输入搜索内容" id="txt"/>
+    <script>
+        // 注册获取焦点事件
+        my$("txt").onfocus = function(){
+            this.value = "";
+        };
+        // 注册失去焦点事件
+        my$("txt").onblur = function(){
+            this.value="请输入搜索内容";
+        };  
+    </script>
+</body>
+</html>

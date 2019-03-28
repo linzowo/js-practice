@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>二维码变大</title>
+    <style>
+        .im1{
+            float: right;
+            margin-top: 200px;
+            width: 200px;
+        }
+        .im2{
+            float: right;
+            margin-top: 200px;  
+            width: 400px;
+        }
+        .disp{
+            /* visibility: hidden; */
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <img src="images/hz1.jpg" alt="" class="im1" id="ims"/>
+    <img src="images/hz1.jpg" alt="" class="im2 disp" id="imm"/>
+
+    <script>
+        document.getElementById("ims").onmouseover = function(){
+            document.getElementById("imm").className = "im2";
+        }
+        document.getElementById("ims").onmouseout = function(){
+            document.getElementById("imm").className = "im2 disp";
+        }
+    </script>
+</body>
+</html>

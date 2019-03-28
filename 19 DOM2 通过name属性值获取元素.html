@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>根据name属性值获取元素</title>
+    <script>
+        var my$ = function(id){
+            return document.getElementById(id);
+        }
+    </script>
+    <style>
+        input{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <input type="button" value="显示属性" id="btn" />
+    <input type="text" value="默认值" name="name1"/>
+    <input type="text" value="默认值" name="name2"/>
+    <input type="text" value="默认值" name="name1"/>
+    <input type="text" value="默认值" name="name1"/>
+    <input type="text" value="默认值" name="name2"/>
+    <input type="text" value="默认值" name="name1"/>
+
+    <script>
+        // 获取name属性为name1的元素
+        var nalist = document.getElementsByName("name1");
+        my$("btn").onclick = function(){
+            for(var i = 0;i<nalist.length;i++){
+                nalist[i].value = "这个是新值";
+            }
+        };
+    </script>
+</body>
+</html>

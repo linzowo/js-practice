@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>阻止超链接跳转</title>
+</head>
+<body>
+    <!-- 阻止超链接跳转的常规操作使用return false -->
+    <!-- 第一种写法 -->
+    <!-- <a href="http://www.baidu.com" id="bd" onclick="alert('被点了'); return false">百度一下</a> -->
+    <!-- 第二种写法 -->
+    <!-- <script>
+        function f1(){
+            alert("hh");
+            return false;
+        }
+    </script>
+    <a href="http://www.baidu.com" id="bd" onclick= "return f1()">百度一下</a> -->
+    <!-- 第三种写法 -->
+    <a href="http://www.baidu.com" id="bd">百度一下</a>
+    <script>
+        document.getElementById("bd").onclick = function(){
+            alert("xx");
+            return false;
+        }
+    </script>
+
+    <!-- 以下这种方式也可以阻止超链接跳转，但是会影响数据来源，不推荐使用                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        -->
+    <!-- <input type="button" value="阻止超链接" id="btn" />
+
+    <script>
+        document.getElementById("btn").onclick = function(){
+            document.getElementById("bd").href = "";
+        }
+    </script> -->
+</body>
+</html>

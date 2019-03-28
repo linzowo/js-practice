@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>div边框高亮显示效果</title>
+    <script>
+        var my$ = function(id){
+            return document.getElementById(id);
+        }
+    </script>
+    <style>
+        div{
+            width: 200px;
+            height: 200px;
+            background-color: yellow;
+            float: left;
+            margin: 10px 5px;
+            border: 2px solid yellow;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+
+    <script>
+        var dvlist = document.getElementsByTagName("div");
+        // 为每个元素注册鼠标进入和离开事件
+        for(var i =0;i<dvlist.length;i++){
+            dvlist[i].onmouseover = function(){
+                this.style.border = "2px solid green";
+            };
+            dvlist[i].onmouseout = function(){
+                this.style.border = "2px solid yellow";
+            };
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>设置和删除自定义属性</title>
+    <script>
+        var my$ = function(id){
+            return document.getElementById(id);
+        }
+    </script>
+</head>
+<body>
+    <ul id="uu">
+        <li>林</li>
+        <li>李</li>
+        <li>张三</li>
+        <li>李四</li>
+        <li>王五</li>
+    </ul>
+    <input type="button" id="btn1" value="显示电话号码"/>
+    <input type="button" id="btn2" value="隐藏电话号码"/>
+    <input type="button" id="btn3" value="删除新增属性"/>
+
+    <script>
+        // 为每个li标签添加一个存储电话的属性
+        // 获取li标签
+        var lists = my$("uu").getElementsByTagName("li");
+        // 为每个li标签添加新属性
+        for(var i =0 ; i<lists.length;i++){
+            var num = prompt("请输入"+lists[i].innerHTML+"的电话号码：");
+            lists[i].setAttribute("num",num);
+        }
+        // 为按钮注册点击事件
+        my$("btn1").onclick = function(){
+            // 修改li标签内的内容为名称加电话号码d
+            for(var j=0;j<lists.length;j++){
+                lists[j].innerHTML = lists[j].innerHTML+"<p>:"+lists[j].getAttribute("num")+"</p>";
+            }
+        };
+
+        // 隐藏电话号码
+        my$("btn2").onclick = function(){
+            for(var k = 0;k<lists.length;k++){
+                lists[k].getElementsByTagName("p")[0].style.display = "none";
+            }
+        }
+        // 删除新增属性
+        my$("btn3").onclick = function(){
+            for(var l =0;l<lists.length;l++){
+                lists[l].removeAttribute("num");
+            }
+        }
+    </script>
+</body>
+</html>

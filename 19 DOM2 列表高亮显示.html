@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>点击图片超链接显示大图</title>
+    <script>
+        var my$ = function(id){
+            return document.getElementById(id);
+        }
+    </script>
+    <style>
+        .yell {
+            background-color: yellow;
+        }
+        .re {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <!-- <input type="button" name="" id="btn" value="变色" /> -->
+    <ul id="uu">
+        <li>单行1</li>
+        <li>单行2</li>
+        <li>单行3</li>
+        <li>单行4</li>
+        <li>单行5</li>
+        <li>单行6</li>
+    </ul>
+
+    <script>
+        var lists = my$("uu").getElementsByTagName("li");
+        // 为列表每一行注册鼠标进入和离开事件
+        for(var i = 0;i<lists.length;i++){
+            // 鼠标进入
+            lists[i].onmouseover = function(){
+                // 将所有列表背景颜色去掉
+                for(var j =0;j<lists.length;j++){
+                    lists[j].className = "";
+                }
+                // 为鼠标经过的那一行添加背景色
+                this.className = "yell";
+            }
+            // 鼠标离开
+            lists[i].onmouseout = function(){
+                this.className = "";
+            }
+        }
+    </script>
+</body>
+</html>

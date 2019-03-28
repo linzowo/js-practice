@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>关于节点操作的12行代码</title>
+    <script>
+        var my$ = function(id){
+            return document.getElementById(id);
+        }
+    </script>
+</head>
+<body>
+    <div class="dv">
+        <ul id="uu">
+            <li>第一行</li>
+            <li>第二行</li>
+            <li id="three">第三行</li>
+            <li>第四行</li>
+            <li>第五行</li>
+        </ul>
+    </div>
+
+    <script>
+        // 获取父节点
+        console.log(my$("uu").parentNode);
+        // 获取父元素
+        console.log(my$("uu").parentElement);
+        // 子节点
+        console.log(my$("uu").childNodes);
+        // 子元素
+        console.log(my$("uu").children);
+
+        console.log("===========================================");
+        // 第一个子节点 在ie8中这是个元素对象,以下同
+        console.log(my$("uu").firstChild.innerText);
+        // 第一个子元素 在ie8中这个不起作用,以下同
+        console.log(my$("uu").firstElementChild);
+        // 最后一个子节点
+        console.log(my$("uu").lastChild);
+        // 最后一个子元素
+        console.log(my$("uu").lastElementChild);
+        // 前一个子节点
+        console.log(my$("three").previousSibling);
+        // 前一个子元素
+        console.log(my$("three").previousElementSibling);
+        // 后一个子节点
+        console.log(my$("three").nextSibling);
+        // 后一个子元素
+        console.log(my$("three").nextElementSibling);
+    </script>
+</body>
+</html>

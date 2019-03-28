@@ -1,0 +1,23 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>点击图片超链接显示大图</title>
+    <script>
+        var my$ = function(id){
+            return document.getElementById(id);
+        }
+    </script>
+</head>
+<body>
+    <a href="images/longjuan.jpg" id="small"><img src="images/longjuan.jpg" alt="" width="100"/></a>
+    <img src="" alt="" id="big">
+    <script>
+        my$("small").onclick = function(){
+            my$("big").src = my$("small").href;
+            return false;
+        }
+    </script>
+</body>
+</html>
