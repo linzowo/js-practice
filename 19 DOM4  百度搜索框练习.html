@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>百度搜索</title>
+    <script>
+        var my$ = function(id){
+            return document.getElementById(id);
+        }
+    </script>
+    <script src="common.js"></script>
+    <style>
+        #dv{
+            width: 500px;
+            margin: 200px auto;
+            /* background-color: red; */
+        }
+        #txt{
+            width: 400px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="dv">
+        <input type="text" id="txt"/>
+        <input type="button" value="搜索" id="btn"/>
+    </div>
+
+    <script>
+        // 需要实现的功能
+        /*
+        *1.在文本框内输入内容后，在输入框下方弹出一个区域，区域内显示后台数据中，以用户输入开头的内容，
+        *当鼠标经过弹出框内内容时该内容高亮显示 ，删除输入框内容后弹出框消失
+        * 参数：一个包含测试内容的数组
+        *分解
+        * 1.文本框内内容输入后自动检索后台是否有符合条件的数据。》需要判断用户每次输入》当检测到按键抬起事件后就执行检索对比
+        * 2.当检索到后台有符合条件数据时就弹出提示框
+        * 3.提示框内内容，随鼠标经过高亮显示
+        * 4.删除输入框内容后，弹出框消失         
+        * */
+    //    创建一个用于对比的数据组
+        var list = ["一条大河波浪宽","一条大江波浪宽","一条水沟波浪宽","一条内裤波浪宽","一条大海波浪宽","两匹马在跑","两匹马赛克在跑",
+    "两匹驴在跑","两匹熊猫在跑","三只松鼠","三只老鼠","三只老虎"];
+        // 创建两个用于高亮显示的函数
+        // 鼠标进入时的函数
+        function mouseOver(){
+            this.style.backgroundColor = "yellow";
+        }
+        // 鼠标离开时的函数
+        function mouseOut(){ 
+            this.style.backgroundColor = "";            
+        }
+
+        // 主函数
+        function getTxtDate(){
+            // 初始化数据
+            // 创建一个用来存放目标内容的数组
+            var tempArr = [];
+
+            // 判断页面中是否有提示框，如有删除其
+            if(my$("sdv")){
+                my$("dv").removeChild(my$("sdv"));
+            }
+            // 判断用户输入的内容是否在数据列表中
+            for(var i=0;i<list.length;i++){
+                // 如果用户输入内容是某个字符串的开头，将其加入临时数组中
+                if(list[i].indexOf(this.value)==0){
+                    tempArr.push(list[i]);
+                }
+            }
+
+            // 当临时数组为空或输入框为空时阻止创建提示框
+            if(tempArr.length==0||this.value==""){
+                // my$("dv").removeChild(dropBox);
+                if(my$("sdv")){
+                    my$("dv").removeChild(my$("sdv"));
+                }
+                return;
+            }
+
+            // 创建一个用于展示的区域
+            var dropBox = document.createElement("div");
+            dropBox.id = "sdv";
+            dropBox.style.border = "1px solid #ccc";
+            dropBox.style.width = "400px";
+            // 将这个元素添加到盒子内
+            my$("dv").appendChild(dropBox);
+            // 向展示区域内添加内容
+            for(var j =0;j<tempArr.length;j++){
+                var pObj = document.createElement("p");
+                dropBox.appendChild(pObj);
+                pObj.style.margin = "0";
+                pObj.style.padding = "0";
+                pObj.style.cursor = "pointer";
+                pObj.style.marginTop = "5px";
+                pObj.style.marginLeft = "5PX";
+                setInnerText(pObj,tempArr[j]);
+                // 为p元素设置高亮显示
+                // 鼠标进入时
+                pObj.onmouseover = mouseOver;
+                // 鼠标离开时
+                pObj.onmouseout = mouseOut;
+                // // 鼠标进入时
+                // pObj.onmouseover = function(){
+                //     this.style.backgroundColor = "yellow";
+                // };
+                // // 鼠标离开时
+                // pObj.onmouseout = function(){
+                //     this.style.backgroundColor = "";
+                // };
+            }
+
+        }
+
+        // 为元素绑定事件
+        addEventListener(my$("txt"),"keyup",getTxtDate);
+
+    </script>
+</body>
+</html>

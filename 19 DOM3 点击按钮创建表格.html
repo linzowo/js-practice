@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>点击按钮创建表格</title>
+    <script>
+        var my$ = function(id){
+            return document.getElementById(id);
+        }
+    </script>
+</head>
+<body>
+    <input type="button" id="btn" value="create"/>
+
+    <script>
+        var list = [
+            {name:"百度",href:"http://www.baidu.com"},
+            {name:"优酷",href:"http://www.youku.com"},
+            {name:"土豆",href:"http://www.tudou.com"},
+            {name:"新浪",href:"http://ww.sina.com"},
+            {name:"搜狐",href:"http://www.sohu.com"},
+        ]
+        // 方法1
+        // my$("btn").onclick = function(){
+        //     // 创建一个table 区域
+        //     var tab = document.createElement("table");
+        //     // 外层循环控制列表行数
+        //     for(var i=0;i<list.length;i++){
+        //         // 创建一个行区域tr
+        //         var tr = document.createElement("tr");
+        //             if(i == 0){
+        //                 // 创建第一个表头元素
+        //                 var thd1 = document.createElement("th");
+        //                 // 为表头插入内容
+        //                 thd1.innerText = "网站名称";
+                        
+        //                 // 创建第二个表头元素
+        //                 var thd2 = document.createElement("th");
+        //                 // 为表头插入内容
+        //                 thd2.innerHTML = "网站地址";
+
+        //                 // tr.appendChild(th);
+        //             }else{
+        //                 // 创建第一个表格元素
+        //                 var thd1 = document.createElement("td");
+        //                 // 为表格插入内容
+        //                 thd1.innerText = list[i].name;
+                        
+        //                 // 创建第二个表格元素
+        //                 var thd2 = document.createElement("td");
+        //                 // 为表头插入内容
+        //                 thd2.innerHTML = "<a href="+list[i].href+">"+list[i].name+"</a>";
+        //             }//end if
+        //             tr.appendChild(thd1);
+        //             tr.appendChild(thd2);
+        //         tab.appendChild(tr);
+        //     }// end for
+        //     document.body.appendChild(tab);
+        // }
+
+        // 方法2
+        // 为按钮注册点击事件
+        my$("btn").onclick = function(){
+            console.log(list[0].href);
+            // 创建一个表格区域
+            var tab = document.createElement("table");
+            // 将该表格添加到指定区域内
+            document.body.appendChild(tab);
+            // 为tab区域动态的添加行和列
+            for(var i=0;i<list.length;i++){
+                // 创建一个行元素
+                var tr = document.createElement("tr");
+                // 将该元素添加到列表内
+                tab.appendChild(tr);
+                // 创建第一个列元素
+                var td1 = document.createElement("td");
+                // 创建第二个列元素
+                var td2 = document.createElement("td");
+                // 将两个列元素添加到行内
+                tr.appendChild(td1);
+                tr.appendChild(td2);
+                // 向列元素内添加内容
+                td1.innerHTML = list[i].name;
+                td2.innerHTML = "<a href="+list[i].href+">"+list[i].name+"</a>";
+            }
+            tab.border = "1";
+            tab.cellPadding = "0";
+            tab.cellSpacing = "0";
+        }
+
+    </script>
+</body>
+</html>

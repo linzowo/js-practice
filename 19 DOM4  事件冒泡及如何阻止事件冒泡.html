@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>节点操作兼容代码</title>
+    <script>
+        var my$ = function(id){
+            return document.getElementById(id);
+        }
+    </script>
+    <script src="common.js"></script>
+    <style>
+        div{
+            border: 1px solid #ccc;
+        }
+        #dv1{
+            width: 500px;
+            height: 500px;
+            background-color: red;
+        }
+        #dv2{
+            width: 400px;
+            height: 400px;
+            background-color: green;
+        }
+        #dv3{
+            width: 300px;
+            height: 300px;
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div id="dv1">
+        <div id="dv2">
+            <div id="dv3"></div>
+        </div>
+    </div>
+
+    <script>
+
+        // 事实证明
+        /*
+        *e.eventPhase在ie8下不存在
+        *window.event.cancelBubble=true此方法在新版Firefox中有效
+        * e.stopPropagation()在新版chrome中也可使用
+        *
+        */
+        // 事件冒泡
+        my$("dv1").onclick = function(e){
+            // window.event.cancelBubble=true;
+            console.log("div1===>"+e.eventPhase);
+        };
+        my$("dv2").onclick = function(e){
+            // window.event.cancelBubble=true;
+            console.log("div2===>"+e.eventPhase);
+        };
+        my$("dv3").onclick = function(e){
+            // window.event.cancelBubble=true;// 此方法兼容谷歌和ie8；不兼容Firefox
+            e.stopPropagation();//此方法支持Firefox
+            console.log("div3===>"+e.eventPhase);
+        };
+        // function f1(e){
+        //     console.log(this.id+"===>"+e.eventPhase);
+        // }
+        // addEventListener(my$("dv1"),"click",f1);
+        // addEventListener(my$("dv2"),"click",f1);
+        // addEventListener(my$("dv3"),"click",f1);
+
+        // 阻止事件冒泡
+
+
+    </script>
+
+</body>
+</html>

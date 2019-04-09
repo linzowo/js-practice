@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>history练习1</title>
+</head>
+<body>
+
+    <input type="button" id="btn1" value="跳转" />
+    <input type="button" id="btn2" value="前进" />
+
+    <script src="common.js"></script>
+    <script>
+        my$("btn1").onclick = function(){
+            location.href = "20 BOM1 history之前进后退2.html";
+        };
+        my$("btn2").onclick = function(){
+            history.forward();
+        }
+    </script>
+    
+</body>
+</html>

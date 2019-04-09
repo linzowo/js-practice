@@ -109,3 +109,31 @@ function getBrotherElementAll(element){
     }// end while
     return broElementList;
 }
+
+// 为任意元素绑定任意事件，元素，事件类型，事件处理函数
+function addEventListener(element,type,fn){
+    if(element.addEventListener){
+        // chrome,firefox等
+        element.addEventListener(type,fn,false);
+    }else if(element.attachEvent){
+        // ie8
+        element.attachEvent("on"+type,fn);
+    }else{
+        // 其他浏览器
+        element["on"+type]=fn;
+    }// end if
+}
+
+// 为任意元素解绑任意事件
+function removeEventListener(element,type,fnName){
+    if(element.removeEventListener){
+        // chrome,firefox等
+        element.removeEventListener(type,fnName,false);
+    }else if(element.detachEvent){
+        // ie8
+        element.detachEvent("on"+type,fnName);
+    }else{
+        // 其他浏览器
+        element["on"+type]=null;
+    }// end if
+}

@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>为一个元素绑定多个事件，指向同一个事件处理函数</title>
+    <script>
+        var my$ = function(id){
+            return document.getElementById(id);
+        }
+    </script>
+    <script src="common.js"></script>
+</head>
+<body>
+    <input type="button" id="btn1" value="绑定事件" />
+
+    <script>
+         my$("btn1").onclick = f1;
+         my$("btn1").onmouseover = f1;
+         my$("btn1").onmouseout = f1;
+
+         function f1(e){
+             switch (e.type){
+                case "click" : console.log("哈哈"); break;
+                case "mouseover" : this.style.backgroundColor="red"; break;
+                case "mouseout" : this.style.backgroundColor=""; break;
+             }
+         }
+    </script>
+
+</body>
+</html>

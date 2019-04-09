@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>bom属性测试</title>
+</head>
+<body>
+    
+    <input type="button" id="btn" value="测试" />
+    <script src="common.js"></script>
+    <script>
+        my$("btn").onclick = function(){
+            console.log(window.navigator.userAgent);
+            console.log(window.navigator.platform);
+        }
+    </script>
+</body>
+</html>

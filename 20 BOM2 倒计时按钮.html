@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>倒计时按钮</title>
+</head>
+<body>
+    <textarea name="" id="" cols="30" rows="10">
+        来吧少年签下这份卖身契吧！！！
+    </textarea>
+    <input type="button" id="btn" value="请认真阅读以上内容（5）" disabled = "disabled" />
+
+    <script src="common.js"></script>
+    <script>
+        // 当用户进入到此页面的时候按钮开始倒计时
+        // 创建一个计数变量
+        var num = 5;
+        // 使用定时器每隔一秒变更一次按钮上的文字
+        var timeid = setInterval(function(){
+            num--;
+            my$("btn").value = "请认真阅读以上内容（"+num+"）" ;
+            // 当计算器减到0的时候，停止定时器，修改value值
+            if(num<=0){
+                num=0;
+                clearInterval(timeid);
+                my$("btn").disabled = false;
+                my$("btn").value = "确定" ;
+            }
+        },1000);
+    </script>
+</body>
+</html>

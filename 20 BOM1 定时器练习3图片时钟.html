@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片晃动</title>
+</head>
+<body>
+    <!-- 整体思路 -->
+    <script>
+        /*
+        *每过一秒获取一次系统时间
+        *将时间转换成指定格式
+        * 将转换后的格式作为图片的路径
+        * 所有图片的文件名称按照指定格式书写
+        * 
+        * 
+        * 
+        * */
+        setInterval(function(){
+            // 程序开始运行的时候创建一个图片元素
+            var imgObj = document.createElement("img");
+            // 将这个图片元素加入到body中
+            document.body.appendChild(imgObj);
+            // 获取系统时间
+            // 获取年
+            var year = dt.getFullYear();
+            // 获取月
+            var month = getNewNum(dt.getMonth());
+            // 获取日
+            var day = getNewNum(dt.getDay());
+            // 获取小时
+            var hour = getNewNum(dt.getHours());
+            // 获取分钟
+            var minute = getNewNum(dt.getMinutes());
+            // 获取秒
+            var second = getNewNum(dt.getSeconds());
+            // 组合时间为指定格式
+            var time = year+":"+month+":"+day+":"+hour+":"+minute+":"+second; 
+
+
+            imgObj.src = time;
+        },1000);
+    </script>
+</body>
+</html>
