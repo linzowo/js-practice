@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>点击按钮创建图片</title>
+    <script>
+        var my$ = function(id){
+            return document.getElementById(id);
+        }
+    </script>
+</head>
+<body>
+    <input type="button" id="btn" value="按钮"/>
+
+    <script>
+        // ie8不支持的模式
+        // my$("btn").addEventListener("click",function(){
+        //     console.log("第一行")
+        // },false);
+        // my$("btn").addEventListener("click",function(){
+        //     console.log("第2行")
+        // },false);
+        // my$("btn").addEventListener("click",function(){
+        //     console.log("第3行")
+        // },false);
+        // my$("btn").addEventListener("click",function(){
+        //     console.log("第4行")
+        // },false);
+
+        // ie8支持的模式
+        my$("btn").attachEvent("onclick",function(){
+            console.log("hello ie1");
+        });
+        my$("btn").attachEvent("onclick",function(){
+            console.log("hello ie2");
+        });
+        my$("btn").attachEvent("onclick",function(){
+            console.log("hello ie3");
+        });
+        my$("btn").attachEvent("onclick",function(){
+            console.log("hello ie4");
+        });
+    </script>
+</body>
+</html>

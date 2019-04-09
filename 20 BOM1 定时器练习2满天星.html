@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片晃动</title>
+    <style>
+        div{
+            width: 600px;
+            height: 600px;
+            background-color: #000;
+            position: relative;
+        }
+        span{
+            color: yellow;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    
+    <input type="button" id="btn1" value="动起来" />
+    <input type="button" id="btn2" value="停下来" />
+    <br />
+    <div id="dv"></div>
+
+    <script src="common.js"></script>
+    <script>
+        var start = "";
+        my$("btn1").onclick = function(){
+            my$("dv").innerHTML = "<span>⭐</span>";
+            if(start == ""){
+                start = setInterval(function(){
+                    var x = Math.random()*600;
+                    var y = Math.random()*600;
+                    getFirstElementChild(my$("dv")).style.top = x+"px";
+                    getFirstElementChild(my$("dv")).style.left= y+"px";
+                },10);
+            }
+        }
+        my$("btn2").onclick = function(){
+            clearInterval(start);
+            start = "";
+        }
+    </script>
+</body>
+</html>

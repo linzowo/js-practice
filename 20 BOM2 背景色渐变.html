@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>背景色渐变</title>
+</head>
+<style>
+    div{
+        width: 300px;
+        height: 300px;
+        background-color: pink;
+    }
+</style>
+<body>
+    <input type="button" id="btn" value="变透明" />
+    <div id="dv"></div>
+
+    <script src="common.js"></script>
+    <script>
+        var opacity = 10;
+        // 使用定时器逐渐改变其透明度
+        my$("btn").onclick = function(){
+            var timeid = setInterval(function(){
+                opacity--;
+                my$("dv").style.opacity = opacity/10;
+            },100);
+            if(opacity<=0){
+                clearInterval(timeid);
+            }
+        }
+    </script>
+</body>
+</html>

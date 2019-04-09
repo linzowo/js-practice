@@ -3,7 +3,7 @@
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <title>三种创建元素的方式</title>
+    <title>点击按钮创建图片</title>
     <script>
         var my$ = function(id){
             return document.getElementById(id);
@@ -24,22 +24,25 @@
     <input type="button" id="btn3" value="create"/>
 
     <script>
+        // 创建一个图片地址
+        var src = "src='images/longjuan.jpg'";
         // document.write的方式
         my$("btn1").onclick = function (){
-            document.write("<p>write的方式创建p元素</p>");
+            document.write("<img "+src+">");
         }
         // innerHtml的方式创建
         my$("btn2").onclick = function (){
-            my$("dv").innerHTML = "<p>innerHtml的方式创建p元素</p>";
+            my$("dv").innerHTML = "<img "+src+" width='200'/>";
         }
         // createElement的方式
         my$("btn3").onclick = function(){
             // 创建该元素
-            var newP = document.createElement("p");
+            var newImg = document.createElement("img");
             // 为元素追加内容
-            newP.innerHTML = "createElement的方式创建p元素";
+            newImg.src = "images/longjuan.jpg";
+            newImg.style.width = "200px";
             // 将完整的该元素添加到需要的元素内
-            my$("dv").appendChild(newP);
+            my$("dv").appendChild(newImg);
         }
     </script>
 </body>

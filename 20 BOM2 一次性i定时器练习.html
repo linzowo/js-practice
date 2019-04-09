@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>一次性定时器练习</title>
+    <style>
+        img{
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <input type="button" id="btn1" value="按钮1" />
+    <input type="button" id="btn2" value="按钮2" />
+
+    <script src="common.js"></script>
+    <script>
+
+        // var timeid = "";
+        my$("btn1").onclick = function(){
+            my$("btn1").timeid = setTimeout(function(){
+                console.log("hello world")
+            },1000);
+        }
+        my$("btn2").onclick = function(){
+            clearTimeout(my$("btn1").timeid);
+        }
+    </script>
+</body>
+</html>

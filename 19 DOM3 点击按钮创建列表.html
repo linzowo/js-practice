@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>点击按钮创建表格</title>
+    <script>
+        var my$ = function(id){
+            return document.getElementById(id);
+        }
+    </script>
+
+    <style>
+        div{
+            width: 200px;
+            height: 500px;
+            background-color: gold;
+        }
+    </style>
+</head>
+<body>
+    <input type="button" id="btn1" value="innerHtml"/>
+    <input type="button" id="btn2" value="create"/>
+    <div id="dv"></div>
+
+    <script>
+        // 为按钮1注册点击事件
+        my$("btn1").onclick = function(){
+            my$("dv").innerHTML = "<ul>  <li>静夜诗</li>    <li>床前明月光</li>    <li>疑是地上霜</li>    <li>举头望明月</li>    <li>低头思故乡</li>  </ul>";
+        }
+        // 为按钮1注册点击事件
+        my$("btn2").onclick = function(){
+            if(my$("dv").getElementsByTagName("ul").length==0){
+                var list = ["静夜诗","床前明月光","疑是地上霜","举头望明月","低头思故乡"];
+                var ul = document.createElement("ul");
+                for(var i=0;i<list.length;i++){
+                    var li = document.createElement("li");
+                    li.innerText = list[i];
+                    ul.appendChild(li);
+                }
+                my$("dv").appendChild(ul);
+            }
+        }
+    </script>
+    
+</body>
+</html>

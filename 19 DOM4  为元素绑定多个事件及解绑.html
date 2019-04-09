@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>节点操作兼容代码</title>
+    <script>
+        var my$ = function(id){
+            return document.getElementById(id);
+        }
+    </script>
+    <script src="common.js"></script>
+</head>
+<body>
+    <input type="button" id="btn1" value="绑定事件" />
+    <input type="button" id="btn2" value="移除事件" />
+
+    <script>
+        // 为任意元素绑定任意任意事件处理函数
+        function addEventListener(element,type,fn){
+            if(element.addEventListener){
+                // chrome,firefox等
+                element.addEventListener(type,fn,false);
+            }else if(element.attachEvent){
+                // ie8
+                element.attachEvent("on"+type,fn);
+            }else{
+                // 其他浏览器
+                element["on"+type]=fn;
+            }// end if
+        }
+
+        // 为任意元素解绑任意事件
+        function removeEventListener(element,type,fnName){
+            if(element.removeEventListener){
+                // chrome,firefox等
+                element.removeEventListener(type,fnName,false);
+            }else if(element.detachEvent){
+                // ie8
+                element.detachEvent("on"+type,fnName);
+            }else{
+                // 其他浏览器
+                element["on"+type]=null;
+            }// end if
+        }
+
+        // 测试
+        function f1(){
+            console.log("第一行");
+        }
+        
+        function f2(){
+            console.log("第二行");
+        }
+        addEventListener(my$("btn1"),"click",f1);
+        addEventListener(my$("btn1"),"click",f2);
+
+        my$("btn2").onclick = function(){
+            removeEventListener(my$("btn1"),"click",f1);
+        }
+        // my$("btn2").removeEventListener
+    </script>
+
+
+</body>
+</html>

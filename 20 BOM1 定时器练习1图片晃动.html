@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片晃动</title>
+    <style>
+        img{
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    
+    <input type="button" id="btn1" value="动起来" />
+    <input type="button" id="btn2" value="停下来" />
+    <br />
+
+    <img src="images/longjuan.jpg" alt="龙卷" />
+    <img src="images/yiquan.jpeg" alt="一拳" />
+    <script src="common.js"></script>
+    <script>
+        function f1(){
+            var imgObjs = document.getElementsByTagName("img");
+            var x = Math.random()*200;
+            var y = Math.random()*200;
+            for(var i = 0;i<imgObjs.length;i++){
+                imgObjs[i].style.marginTop = x+"px";
+                imgObjs[i].style.marginLeft = y+"px";
+            }
+        }
+        // var start = setInterval(f1,1000);
+        var start = "";
+        my$("btn1").onclick = function(){
+            if(start == ""){
+                start = setInterval(f1,100);            
+                console.log(start);
+            }
+        };
+        my$("btn2").onclick = function(){
+            clearInterval(start);
+            start = "";
+        }
+    </script>
+</body>
+</html>

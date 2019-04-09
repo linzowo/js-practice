@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>节点操作兼容代码</title>
+    <script>
+        var my$ = function(id){
+            return document.getElementById(id);
+        }
+    </script>
+</head>
+<body>
+    <input type="button" id="btn" value="按钮" />
+
+    <script>
+        // my$("btn").addEventListener
+        // 为任意元素绑定任意事件，元素，事件类型，事件处理函数
+        function addEventListener(element,type,fn){
+            if(element.addEventListener){
+            // 检查是否支持google chrome和Firefox
+                element.addEventListener(type,fn,false);
+            }else if(element.attachEvent){
+                // ie8绑定事件代码
+                element.attachEvent("on"+type,fn);
+            }else{
+                // 如果这两种方式都不支持的浏览器
+                element["on"+type] = fn;
+            }
+        }
+        // 测试
+        addEventListener(my$("btn"),"click",function(){
+            console.log("hello 1");
+        });
+        addEventListener(my$("btn"),"click",function(){
+            console.log("hello 2");
+        });
+        addEventListener(my$("btn"),"click",function(){
+            console.log("hello 3");
+        });
+        addEventListener(my$("btn"),"click",function(){
+            console.log("hello 4");
+        });
+    </script>
+    
+
+</body>
+</html>
