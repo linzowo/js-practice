@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>背景色渐变</title>
+</head>
+<style>
+    div{
+        width: 200px;
+        height: 200px;
+        background-color: pink;
+        border-radius: 100px;
+    }
+</style>
+<body>
+    <input type="button" id="btn1" value="变长" />
+    <input type="button" id="btn2" value="stop" />
+    <div id="dv"></div>
+
+    <script src="common.js"></script>
+    <script>
+        // make the div wider
+        my$("btn1").onclick = function(){
+            clearInterval(my$("btn1").timeid);
+            var width = my$("dv").offsetWidth;
+            console.log(width);
+            my$("btn1").timeid = setInterval(function(){
+                width += 10;
+                my$("dv").style.width = width + "px";
+            },100);
+        };
+        // stop the div wider
+        my$("btn2").onclick = function(){
+            clearInterval(my$("btn1").timeid);
+        }
+    </script>
+</body>
+</html>

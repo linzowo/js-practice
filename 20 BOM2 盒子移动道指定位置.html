@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>移动位置</title>
+</head>
+<style>
+    input{
+        margin-top: 20px;
+        margin-left: 10px;
+    }
+    div{
+        margin-top: 100px;
+        position: absolute;
+        width: 200px;
+        height: 100px;
+        background-color: pink;
+        left: 50px;
+    }
+</style>
+<body>
+    <input type="button" id="btn1" value="移动到400" />
+    <input type="button" id="btn2" value="移动到800" />
+    <div id="dv"></div>
+
+    <script src="common.js"></script>
+    <script>
+        /*
+        * 移动出去后无法移动回来
+        * 步长不是10的时候最后的结果值可能有偏差
+        * 
+        * */
+        function anima(element,target){
+            element.timeId = setInterval(function(){
+                // 获取当期div所在位置
+                var current = element.offsetLeft;
+                // 规定一个移动步数
+                var step = 10;
+                // 判断当前值是否大于目标值，如果大于目标值则向后移动，如果不大于则继续向前移动
+                step = target>current?step:-step;
+                // 判断是否达到目标值
+                if(Math.abs(target - current) > Math.abs(step)){
+                    // 修改其left值,前进一步
+                    element.style.left = current + step +"px";
+                }else{
+                    // 达到则清理定时器
+                    clearInterval(element.timeId);
+                    element.style.left = target + "px";
+                }
+            },20);
+        }
+        my$("btn1").onclick = function(){
+            anima(my$("dv"),400);
+        };
+        my$("btn2").onclick = function(){
+            anima(my$("dv"),800);
+        };
+
+        // my$("btn1").onclick = function(){
+        //     // console.log(1);
+        //     // 规定一个移动步数
+        //     var step = 10;
+        //     // 设置目标值
+        //     var target = 400;
+        //     // 启动定时器
+        //     my$("dv").timeId = setInterval(function(){
+        //         // console.log(2);
+        //         // 获取当期div所在位置,并向前一步
+        //         var current = my$("dv").offsetLeft;
+        //         // 判断是否达到目标值
+        //         if(current < target){
+        //             // console.log(3);
+        //             // 修改其left值,前进一步
+        //             my$("dv").style.left = current + step +"px";
+        //         }else{
+        //             // console.log(4);
+        //             // 达到则清理定时器
+        //             clearInterval(my$("dv").timeId);
+        //         }
+        //     },20);
+        // }
+        // my$("btn2").onclick = function(){
+        //     // console.log(1);
+        //     // 规定一个移动步数
+        //     var step = 10;
+        //     // 设置目标值
+        //     var target = 800;
+        //     // 启动定时器
+        //     my$("dv").timeId = setInterval(function(){
+        //         // console.log(2);
+        //         // 获取当期div所在位置,并向前一步
+        //         var current = my$("dv").offsetLeft;
+        //         // 判断是否达到目标值
+        //         if(current < target){
+        //             // console.log(3);
+        //             // 修改其left值,前进一步
+        //             my$("dv").style.left = current + step +"px";
+        //         }else{
+        //             // console.log(4);
+        //             // 达到则清理定时器
+        //             clearInterval(my$("dv").timeId);
+        //         }
+        //     },20);
+        //     // console.log(my$("dv").offsetLeft);
+        // }
+    </script>
+</body>
+</html>
