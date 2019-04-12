@@ -30,7 +30,8 @@
         * 步长不是10的时候最后的结果值可能有偏差
         * 
         * */
-        function anima(element,target){
+        function animate(element,target){
+            clearInterval(element.timeId);
             element.timeId = setInterval(function(){
                 // 获取当期div所在位置
                 var current = element.offsetLeft;
@@ -50,10 +51,10 @@
             },20);
         }
         my$("btn1").onclick = function(){
-            anima(my$("dv"),400);
+            animate(my$("dv"),400);
         };
         my$("btn2").onclick = function(){
-            anima(my$("dv"),800);
+            animate(my$("dv"),800);
         };
 
         // my$("btn1").onclick = function(){
