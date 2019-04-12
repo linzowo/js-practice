@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>简单轮播图</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    .box{
+        /* background-color: pink; */
+        margin-top: 100px;
+    }
+    .inner{
+        width: 510px;
+        height: 280px;
+        background-color: yellow;
+        border: 5px solid #000;
+        margin: 0 auto;
+        position: relative;
+        overflow: hidden;
+    }
+    .inner ul {
+        width: 10000px;
+        position: relative;
+        /* z-index: 0; */
+    }
+    .inner ul li{
+        list-style: none;
+        float: left;
+    }
+    .square{
+        /* background-color: blue; */
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        z-index: 10;
+    }
+    .square span{
+        float: left;
+        margin-right: 10px;
+        width: 20px;
+        height: 20px;
+        background-color: #fff;
+        text-align: center;
+        cursor: pointer;
+    }
+    .square .current{
+        background-color: red;
+    }
+
+</style>
+<body>
+    <div class="box" id="box">
+        <!-- 相框 -->
+        <div class="inner">
+            <!-- 图片 -->
+            <ul>
+                <li><img src="images/tb1.webp" alt="淘宝1" /></li>
+                <li><img src="images/tb2.jpg" alt="淘宝2" /></li>
+                <li><img src="images/tb3.jpg" alt="淘宝3" /></li>
+                <li><img src="images/tb4.jpg" alt="淘宝4" /></li>
+                <li><img src="images/tb5.webp" alt="淘宝5" /></li>
+            </ul>
+            <!-- 小方块 -->
+            <div class="square">
+                <span class="current">1</span>
+                <span>2</span>
+                <span>3</span>
+                <span>4</span>
+                <span>5</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- js区域 -->
+    <script src="common.js"></script>
+    <script>
+
+        // 设置任意元素移动到指定位置
+        function animate(element,target){
+            clearInterval(element.timeId);
+            element.timeId = setInterval(function(){
+                // 获取当期div所在位置
+                var current = element.offsetLeft;
+                // 规定一个移动步数
+                var step = 100;
+                // 判断当前值是否大于目标值，如果大于目标值则向后移动，如果不大于则继续向前移动
+                step = target>current?step:-step;
+                // 判断是否达到目标值
+                if(Math.abs(target - current) > Math.abs(step)){
+                    // 修改其left值,前进一步
+                    element.style.left = current + step +"px";
+                }else{
+                    // 达到则清理定时器
+                    clearInterval(element.timeId);
+                    element.style.left = target + "px";
+                }
+            },10);
+        }
+
+        var my$ = function(id){
+            return document.getElementById(id);
+        }
+        
+        // 目标功能当鼠标进入右下角的数字标签框内时，自动切换到对应图片
+        // 获取需要的元素
+        // 获取box元素
+        var box = my$("box");
+        // 获取inner元素
+        var inner = box.children[0];
+        // 获取相框的宽度
+        var imgwidth = inner.offsetWidth;
+        // 获取ul
+        var ulObj = inner.children[0];
+        // 获取span元素
+        var spanList = inner.children[1].children;
+
+        // 为每个span标签注册鼠标进入事件
+        for(var i=0;i<spanList.length;i++){
+            // 为每个span标签添加一个索引值
+            spanList[i].setAttribute("index",i);
+            spanList[i].onmouseover = function(){
+                // console.log(this.getAttribute("index"));
+                // 当鼠标进入时使当前所在span颜色变红
+                for(var j=0;j<spanList.length;j++){
+                    spanList[j].removeAttribute("class");
+                }
+                this.className = "current";
+                // 当鼠标进入时获取当前的索引值
+                var pic = this.getAttribute("index");
+                // 当鼠标进入时使ul移动相应的距离
+                animate(ulObj,-pic*imgwidth);
+            }
+        }
+        
+    </script>
+</body>
+</html>
