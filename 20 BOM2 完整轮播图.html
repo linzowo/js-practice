@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>完整轮播图</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    .box{
+        /* background-color: pink; */
+        margin-top: 100px;
+    }
+    .inner{
+        width: 510px;
+        height: 280px;
+        background-color: yellow;
+        border: 5px solid #000;
+        margin: 0 auto;
+        position: relative;
+        overflow: hidden;
+    }
+    .inner ul {
+        width: 10000px;
+        position: relative;
+        /* z-index: 0; */
+    }
+    .inner ul li{
+        list-style: none;
+        float: left;
+    }
+    .square{
+        /* background-color: blue; */
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        z-index: 10;
+    }
+    .square span{
+        float: left;
+        margin-right: 10px;
+        width: 20px;
+        height: 20px;
+        background-color: #fff;
+        text-align: center;
+        cursor: pointer;
+    }
+    .square .current{
+        background-color: red;
+    }
+    .focusD{
+        display: none;
+    }
+    .focusD span{
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background-color: rgba(255,255,255,.5);
+        top: 50%;
+        margin-top: -25px;
+        text-align: center;
+        line-height: 50px;
+        font-size: 40px;
+        color: #fff;
+        cursor: pointer;
+    }
+    .focusD #left{
+        left: 0;
+    }
+    .focusD #right{
+        right: 0;
+    }
+</style>
+<body>
+    <div class="box" id="box">
+        <!-- 相框 -->
+        <div class="inner">
+            <!-- 图片 -->
+            <ul>
+                <li><img src="images/tb1.webp" alt="淘宝1" /></li>
+                <li><img src="images/tb2.jpg" alt="淘宝2" /></li>
+                <li><img src="images/tb3.jpg" alt="淘宝3" /></li>
+                <li><img src="images/tb4.jpg" alt="淘宝4" /></li>
+                <li><img src="images/tb5.webp" alt="淘宝5" /></li>
+            </ul>
+            <!-- 小方块 -->
+            <div class="square">
+            </div>
+            <!-- 左右箭头 -->
+            <div class="focusD">
+                <span id="left">&lt;</span><span id="right">&gt;</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- js区域 -->
+    <script src="common.js"></script>
+
+    <script>
+        // 通过id获取元素
+        var my$ = function(id){
+            return document.getElementById(id);
+        }
+
+        // 设置任意元素移动到指定位置
+        function animate(element,target){
+            clearInterval(element.timeId);
+            element.timeId = setInterval(function(){
+                // 获取当期div所在位置
+                var current = element.offsetLeft;
+                // 规定一个移动步数
+                var step = 100;
+                // 判断当前值是否大于目标值，如果大于目标值则向后移动，如果不大于则继续向前移动
+                step = target>current?step:-step;
+                // 判断是否达到目标值
+                if(Math.abs(target - current) > Math.abs(step)){
+                    // 修改其left值,前进一步
+                    element.style.left = current + step +"px";
+                }else{
+                    // 达到则清理定时器
+                    clearInterval(element.timeId);
+                    element.style.left = target + "px";
+                }
+            },10);
+        }    
+
+        //==========================================================
+        // 所需的元素
+        // 获取box元素
+        var box = my$("box");
+        // 获取inner元素
+        var inner = box.children[0];
+        // 获取ul元素
+        var ulObj = inner.children[0];
+        // 获取所有的span的父级标签
+        var square = inner.children[1];
+        // 获取图片宽度
+        var imgWIdth = inner.offsetWidth;
+        // 获取左右按键的父级元素
+        var arr = inner.children[2];
+
+        
+        // 封装一个span的排他功能函数
+        function pt(list,pic){
+            if(pic==list.length){
+                // 当展示的是克隆的那张图片时
+                for(var j =0;j<list.length;j++){
+                    // 清除所有span的class
+                    list[j].removeAttribute("class");
+                }
+                // 为当前span插入样式
+                list[0].className = "current";
+            }else{
+                if(list[pic].className != "current"){
+                    // 为每个span添加排他功能
+                    for(var j =0;j<list.length;j++){
+                        // 清除所有span的class
+                        list[j].removeAttribute("class");
+                    }
+                    // 为当前span插入样式
+                    list[pic].className = "current";
+                }
+            }
+        }
+
+        // 网页打开后无操作自动触发事件
+        // 创建一个计数器，控制播放到第几张图片
+        var pic = 0;
+
+        // 自动生成与图片个数对应的小按钮span标签
+        for(var i=0;i<ulObj.children.length;i++){
+            // 创建一个span标签
+            var span = document.createElement("span");
+            // 将这个span追加到其父级元素中
+            square.appendChild(span);
+            // 向该元素内传入值
+            if(i==0){
+                span.innerHTML = "1";
+                span.className = "current";
+            }else{
+                span.innerHTML = i+1;
+            }
+            // 为每个span标签注册一个索引值，方便后续调用
+            span.setAttribute("index",i);
+            // 为每个元素组成鼠标进入事件
+            span.onmouseover = function(){
+                // 使用排他功能改变span颜色
+                pt(spanList,pic);
+                // 将span的索引值赋值给计数器
+                pic = this.getAttribute("index");
+                // 图片移动到计数器位置处
+                animate(ulObj,-pic*imgWIdth);
+            }
+        }
+        // 获取span组成的列表
+        var spanList = square.children;
+
+        // 向图片列表的最后追加第一张图片的克隆，以便完成无缝切换
+        ulObj.appendChild(ulObj.children[0].cloneNode(true));
+        //图片自动播放，span标签的背景颜色随图片变化变化
+        // 启动自动播放图片的计时器
+        var timeId = setInterval(clickHandle,1000);
+
+        // 鼠标进入inner事件
+        inner.onmouseover = function(){
+            // 清理自动播放功能
+            clearInterval(timeId);
+            // 显示左右箭头
+            arr.style.display = "block";
+            // 点亮相应的span
+            pt(spanList,pic);
+        }
+
+        // 鼠标离开inner事件
+        inner.onmouseout = function(){
+            // 再开启一个自动播放的计时器
+            timeId = setInterval(clickHandle,1000);
+            // 隐藏左右箭头
+            arr.style.display = "none";
+        }
+
+        // 为左右箭头注册点击事件
+        // 左箭头点击事件
+        my$("left").onclick = function(){
+            if(pic==0){
+                // 在将要向第一张左侧移动的一瞬间，完成以下操作达到无缝切换的效果
+                // 重置pic
+                pic=ulObj.children.length-1;
+                // 瞬间跳到最后一张克隆图
+                ulObj.style.left = -pic*imgWIdth + "px";
+            }
+            // 然后向下一张移动
+            pic--;
+            animate(ulObj,-pic*imgWIdth);
+            // 点亮其相应的span
+            pt(spanList,pic);
+        }
+        // 右箭头点击事件
+        my$("right").onclick = clickHandle;
+
+        // 右侧点击事件处理函数
+        function clickHandle(){
+            if(pic==ulObj.children.length-1){
+                // 在将要向最右侧的一张图片右侧移动时
+                // 重置计数器
+                pic=0;
+                // 图片瞬间跳回到第一张
+                ulObj.style.left = pic+"px";
+            }
+            // 然后向下一张移动
+            pic++;
+            animate(ulObj,-pic*imgWIdth);
+            // 点亮其相应的span
+            pt(spanList,pic);
+        }
+    </script>   
+    
+</body>
+</html>

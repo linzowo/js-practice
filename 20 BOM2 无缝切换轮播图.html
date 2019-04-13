@@ -102,11 +102,13 @@
                 pic++;
                 animate(ulObj,-pic*imgWidth);
             }else{
-                // 重置计数器
-                pic=1;
+                pic=0;
                 // 展示图片瞬间跳回第一张
-                ulObj.style.left = -pic*imgWidth+"px";
-            }
+                ulObj.style.left = pic+"px";
+                // 然后继续向下一张移动
+                pic++;
+                animate(ulObj,-pic*imgWidth);
+            }// end if
         }
 
         // 创建一个定时器使图片自动播放
@@ -117,9 +119,10 @@
             clearInterval(picId);
         };
         inner.onmouseout = function(){
-            // 创建一个定时器使图片自动播放
+            // 再开一个定时器使图片自动播放
             picId = setInterval(f1,1000);
         };
+
     </script>
 </body>
 </html>
