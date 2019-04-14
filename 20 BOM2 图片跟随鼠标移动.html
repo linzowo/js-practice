@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片跟随鼠标移动</title>
+</head>
+<style>
+    img{
+        width: 100px;
+        position: absolute;
+    }
+</style>
+<body>
+    <img src="images/longjuan.jpg" alt="" id="im"/>
+
+    <script src="common.js"></script>
+    <script>
+        document.onmousemove = function(e){
+            // 鼠标移动的横纵坐标
+            // 可视区域的横坐标
+            my$("im").style.left =e.clientX + "px";
+            // 可视区域的纵坐标
+            my$("im").style.top =e.clientY + "px";
+        }
+    </script>
+</body>
+</html>

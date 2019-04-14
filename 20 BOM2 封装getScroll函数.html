@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>固定导航栏案例</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    div{
+        width: 1881px;
+    }
+    .top{
+        background-image: url("images/gddhl-top.png");
+        height: 112px;
+    }
+    .nav{
+        background-image: url("images/gddhl-nav.png");
+        height: 47px;
+        position: absolute;
+    }
+    .main{
+        background-image: url("images/gddhl-main.png");
+        height: 3998px;
+        margin-top: 57px;
+    }
+    .fixed{
+        position: fixed;
+        top: 0;
+    }
+</style>
+<body>
+    <div class="top" id="topPart"></div>
+    <div class="nav" id="navBar"></div>
+    <div class="main" id="mainPaart"></div>
+
+    <script src="common.js"></script>
+    <script>
+        // 为什么要封装getScroll函数
+        // 在有的浏览器中不支持其他方法（具体的未测试，但是有总比没有强
+        // 1.封装获取页面向上卷曲值的函数(top/left)
+        function getScroll(){
+            return {
+                top: window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0,
+                left: window.pageXOffset ||  document.documentElement.scrollLeft || document.body.scrollLeft || 0
+            };
+        }
+        // 测试
+        // window.onscroll = function(){
+        //     console.log(getScroll()["top"]);
+        // };
+
+        // 判断窗口的滚动事件是否达到指定值
+        window.onscroll = function(){
+            if(getScroll()["top"]>=my$("topPart").offsetHeight){
+                my$("navBar").className = "nav fixed";
+            }else{
+                my$("navBar").className = "nav";
+            }
+        };
+
+    </script>
+
+</body>
+</html>
