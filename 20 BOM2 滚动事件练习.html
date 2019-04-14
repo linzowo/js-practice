@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>滚动事件练习</title>
+</head>
+<style>
+    div{
+        width: 300px;
+        height: 200px;
+        overflow: auto;
+        border: 1px solid red;
+    }
+</style>
+<body>
+    <div id="dv">
+        天地擦单纯的反对法发发生发射点发生天地擦单纯的反对法发发生发射点发生天地擦单纯的反对法发发生发射点发生天地擦单纯的反对法发发生发射点发生
+        天地擦单纯的反对法发发生发射点发生天地擦单纯的反对法发发生发射点发生天地擦单纯的反对法发发生发射点发生天地擦单纯的反对法发发生发射点发生
+        天地擦单纯的反对法发发生发射点发生天地擦单纯的反对法发发生发射点发生天地擦单纯的反对法发发生发射点发生天地擦单纯的反对法发发生发射点发生
+        天地擦单纯的反对法发发生发射点发生天地擦单纯的反对法发发生发射点发生天地擦单纯的反对法发发生发射点发生天地擦单纯的反对法发发生发射点发生
+    </div>
+    <script src="common.js"></script>
+    <script>
+        my$("dv").onscroll = function(){
+            // console.log("hh");
+            // 获取向上的卷曲值
+            console.log(this.scrollTop);
+        }
+    </script>
+
+</body>
+</html>
