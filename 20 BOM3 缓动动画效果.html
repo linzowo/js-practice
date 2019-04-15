@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>缓动动画</title>
+</head>
+<style>
+    div{
+        width: 300px;
+        height: 300px;
+        background-color: pink;
+        position: absolute;
+    }
+</style>
+<body>
+    <input type="button" id="btn" value="移动" />
+    <div id="dv"></div>
+
+    <script src="common.js"></script>
+    <script>
+        // 1.点击按钮移动div
+        // 设置任意元素移动到指定位置
+        function animate(element,target){
+            clearInterval(element.timeId);
+            element.timeId = setInterval(function(){
+                // 获取当期div所在位置
+                var current = element.offsetLeft;
+                // 规定一个移动步数
+                var step = (target - current)/10;
+                // 因为会存在浮点数的问题，所以必须要判断，step的正负然后取整
+                step = step<0?Math.floor(step):Math.ceil(step);
+                // 修改其left值,前进一步
+                element.style.left = current + step +"px";
+                // 判断是否达到目标值
+                if(current == target){
+                    clearInterval(element.timeId);
+                }
+                console.log("目标："+target+"===当前值："+current+"===step："+step);
+            },20);
+        }    
+
+        // 测试
+        my$("btn").onclick = function(){
+            animate(my$("dv"),800);
+        };
+    </script>
+</body>
+</html>
