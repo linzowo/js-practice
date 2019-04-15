@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>筋斗云</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    body{
+        background-color: #333;
+    }
+    .nav{
+        background-color: #fff;
+        width: 800px;
+        border-radius: 5px;
+        position: relative;
+        top: 100px;
+        left: 50%;
+        margin-left: -400px;
+        z-index: 1;
+    }
+    #navBar {
+        overflow: hidden;
+        position: relative;
+        z-index: 1;
+    }
+    #navBar li{
+        width: 100px;
+        text-align: center;
+        float: left;
+        list-style: none;
+        font-size: 25px;
+    }
+    span{
+        width: 95px;
+        height: 100%;
+        /* margin-left: 10px; */
+        background-color: green;
+        position: absolute;
+        opacity: .5;
+        z-index: 0;
+    }
+</style>
+<body>
+    <div class="nav">
+        <span id="clound"></span>
+        <ul id="navBar">
+            <li>西游记</li>
+            <li>东游记</li>
+            <li>南游记</li>
+            <li>北游记</li>
+            <li>西厢记</li>
+            <li>石头记</li>
+            <li>陈李记</li>
+        </ul>
+    </div>
+
+    <script src="common.js"></script>
+    <script>
+        // 1.点击按钮移动div
+        // 缓动动画
+        function animate(element,target){
+            clearInterval(element.timeId);
+            element.timeId = setInterval(function(){
+                // 获取当期div所在位置
+                var current = element.offsetLeft;
+                // 规定一个移动步数
+                var step = (target - current)/10;
+                // 因为会存在浮点数的问题，所以必须要判断，step的正负然后取整
+                step = step<0?Math.floor(step):Math.ceil(step);
+                // 修改其left值,前进一步
+                element.style.left = current + step +"px";
+                // 判断是否达到目标值
+                if(current == target){
+                    clearInterval(element.timeId);
+                }
+                console.log("目标："+target+"===当前值："+current+"===step："+step);
+            },20);
+        }    
+        //=====================================================================
+        // 获取相应元素
+        // 获取ul
+        var ulObj = my$("navBar");
+        // 获取span
+        var span = my$("clound");
+
+        // 为每个li注册事件
+        for(var i=0;i<ulObj.children.length;i++){
+            // 为每个li添加一个索引值方便确定是哪个li触发事件
+            ulObj.children[i].setAttribute("index",i);
+            // 鼠标进入li的事件
+            ulObj.children[i].onmouseover = mouseoverHandle;
+            // 鼠标离开li的事件
+            ulObj.children[i].onmouseout =mouseoutHandle;
+            // 鼠标点击li的事件
+            ulObj.children[i].onclick = clickHandle;
+        }
+
+        // 为了不使每次循环都在内存中开辟新的空间,将函数提出来
+        function mouseoverHandle(){//进入
+            // 获取当前索引值*每个li的宽度得到要移动到的位置的数值
+            animate(span,this.offsetLeft);
+        }
+        // 创建一个记录上一次选中位置的变量
+        var lastPosition = 0;
+        function mouseoutHandle(){//离开
+            // 返回上一个被选定的位置
+            animate(span,lastPosition);
+        }
+        function clickHandle(){//点击
+            lastPosition = this.offsetLeft;
+        }
+
+    </script>
+</body>
+</html>
