@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>手风琴动画</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    #box{
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        overflow: hidden;
+    }
+    div img{
+        display: block;
+    }
+    div span{
+        position: absolute;
+        /* background-color: pink; */
+        width: 20px;
+        height: 20px;
+        right: 0;
+        cursor: pointer;
+    }
+</style>
+<body>
+    <div id="box">
+        <span></span>
+        <div><img src="images/3601.jpg" alt="" /></div>
+        <div><img src="images/3602.jpg" alt="" /></div>
+    </div>
+
+    <script src="common.js"></script>
+    <script>
+        // 缓动动画
+        function animate(element,json,fn){
+            clearInterval(element.timeId);
+            element.timeId = setInterval(function(){
+                var flag = true;
+                for(var attr in json){
+                    if(attr == "opacity"){
+                        var target = json[attr]*100;
+                        // 获取当期div所在位置
+                        var current = getStyle(element,attr)*100;
+                        // 规定一个移动步数
+                        var step = (target - current)/10;
+                        // 因为会存在浮点数的问题，所以必须要判断，step的正负然后取整
+                        step = step<0?Math.floor(step):Math.ceil(step);
+                        // 将当前值替换到移动后位置
+                        current += step;
+                        // 修改其left值,前进一步
+                        element.style[attr] = current/100;
+                    }else if(attr == "zIndex"){
+                        element.style[attr] = json[attr];
+                    }else{
+                        var target = json[attr];
+                        // 获取当期div所在位置
+                        var current = parseInt(getStyle(element,attr));
+                        // 规定一个移动步数
+                        var step = (target - current)/10;
+                        // 因为会存在浮点数的问题，所以必须要判断，step的正负然后取整
+                        step = step<0?Math.floor(step):Math.ceil(step);
+                        // 将当前值替换到移动后位置
+                        current += step;
+                        // 修改其left值,前进一步
+                        element.style[attr] = current+"px";
+                    }
+                    
+                    // 如果其中有一个没有到达目标值
+                    if(current != target){
+                        flag = false;
+                    }
+                }
+                // 判断是否所有的都达到了达到目标值
+                if(flag){
+                    clearInterval(element.timeId);
+                    // 当所有属性到达指定位置之后才能调用回调函数
+                    if(fn){
+                        fn();
+                    }
+                }
+
+                // 测试代码
+                // console.log("目标："+target+"===当前值："+current+"===step："+step);
+            },10);
+        }
+
+        // ==============================================
+        // 获取相应元素
+        // span
+        var span = my$("box").children[0];
+        // img列表
+        var imgList = my$("box").getElementsByTagName("div");
+
+        // 当鼠标点击span标签时依次关闭两个图片
+        span.onclick = function(){
+            animate(imgList[1],{"height": 0},function(){
+                animate(my$("box"),{"width":0});
+            });
+        }
+
+    </script>
+</body>
+</html>

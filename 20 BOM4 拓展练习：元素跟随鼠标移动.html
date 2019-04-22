@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片跟随鼠标移动</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        a{
+            text-decoration: none;
+            color: #000;
+        }
+        .login-header{
+            height: 100px;
+            text-align: center;
+        }
+        .login-header a{
+            font-size: 25px;
+        }
+        
+        /* 登录框开始 */
+        .login{
+            position: absolute;
+            z-index: 2;
+            width: 400px;
+            height: 200px;
+            background-color: #eee;
+            top: 200px;
+            left: 550px;
+            border: 1px solid #000;
+            display: none;
+        }
+        .login .login-title{
+            width: 100%;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            font-size: 15px;
+            cursor: move;
+        }
+        .close-login{
+            position: absolute;
+            z-index: 3;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            top: -20px;
+            right: -20px;
+            background-color: #fff;
+        }
+        .login .login-input-content{
+            width: 100%;
+            height: 150px;
+            /* background-color: green; */
+        }
+        .login-input-content .login-input {
+            margin-right: 50px;
+            margin-bottom: 20px;
+            text-align: right;
+        }
+        .login-input-content .list-input {
+            width: 250px;
+            height: 30px;
+        }
+        .login-input-content .login-btn{
+            width: 100px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            position: absolute;
+            left: 50%;
+            margin-left: -50px;
+        }
+        /* 登录框结束 */
+        /* 遮挡层 */
+        .login-bg {
+            width: 100%;
+            height: 722px;
+            background-color: #ccc;
+            position: absolute;
+            top: 0;
+            z-index: 1;
+            opacity: .3;
+            display: none;
+        }
+        
+
+    </style>
+</head>
+<body>
+    <div class="login-header">
+        <a id="link" href="javascript:void(0);">点击，弹出登录框</a>
+    </div>
+    <div class="login" id="login"><!-- 登录框 -->
+        <div class="login-title" id="title">登录会员</div>
+        <span>
+            <a id="closeBtn" href="javascript:void(0);" class="close-login">关闭</a>
+        </span>
+        <div class="login-input-content">
+            <div class="login-input">
+                <label>用户名：</label>
+                <input type="text" placeholder="请输入用户名" name="info[username]" id="username" class="list-input"/>
+            </div>
+            <div class="login-input">
+                <label>登录密码：</label>
+                <input type="text" placeholder="请输入登录密码" name="info[password]" id="password" class="list-input" />
+            </div>
+            <input type="button" id="btn" class="login-btn" value="登录会员" />
+        </div>
+    </div>
+    <div class="login-bg" id="bg"></div><!-- 遮挡层 -->
+
+    <!-- ================================================== -->
+    <script src="common.js"></script>
+    <script>
+        // 获取元素
+        // 获取显示登录框的链接
+        var link = my$("link");
+        var closeBtn = my$("closeBtn");
+        // 登录框
+        var loginBox = my$("login");
+        // 登录框头部
+        var title = my$("title");
+        // 遮挡层
+        var loginBg = my$("bg");
+
+        // 点击文字显示登录框
+        link.onclick = function(){
+            loginBox.style.display = "block";
+            loginBg.style.display = "block";
+            // 阻止事件冒泡
+            window.event.cancelBubble = true;
+        }
+        // 点击关闭隐藏登录框
+        closeBtn.onclick = function(){
+            loginBox.style.display = "none";
+            loginBg.style.display = "none";
+        }
+        // 点击页面的任何位置登录框隐藏
+/*         document.onclick = function(){
+            loginBox.style.display = "";
+            loginBg.style.display = "";
+        } */
+
+        // 鼠标点击登录框头部，拖动登录框移动
+        title.onmousedown = function(e){
+                console.log("劲来了");
+            // 获取鼠标的坐标
+            var e = window.event || e;
+            // 获取鼠标到登录框的距离
+            var spanceX = e.clientX - loginBox.offsetLeft;
+            var spanceY = e.clientY - loginBox.offsetTop;
+            // 响应鼠标移动
+            document.onmousemove = function(e){
+                // 获取鼠标的坐标
+                var e = window.event || e;
+                var x = (e.clientX -  spanceX)<0?0:(e.clientX -  spanceX);
+                var y = (e.clientY -  spanceY)<0?0:(e.clientY -  spanceY);
+                x = x+400<document.body.offsetWidth?x:document.body.offsetWidth-400;
+                y = y+200<722?y:722-200;
+                // 改变登录框的坐标（有最大值和最小值
+                loginBox.style.left = x+"px";
+                loginBox.style.top = y+"px";
+            }
+        }
+        document.onmouseup = function(){
+            document.onmousemove = null;
+        }
+    </script>
+</body>
+</html>
