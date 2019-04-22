@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片跟随鼠标移动</title>
+</head>
+<style>
+    body{
+        height: 2000px;
+    }
+    img{
+        width: 100px;
+        position: absolute;
+    }
+</style>
+<body>
+    <img src="images/longjuan.jpg" alt="" id="im"/>
+
+    <script src="common.js"></script>
+    <script>
+        
+        // 1.封装获取页面向上卷曲值的函数(top/left)
+        function getScroll(){
+            return {
+                top: window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0,
+                left: window.pageXOffset ||  document.documentElement.scrollLeft || document.body.scrollLeft || 0
+            };
+        }
+        // ====================================
+        document.onmousemove = function(e){
+            // 判断当前浏览器支持那种类型的事件参数对象
+            e = e || window.event;
+            // 鼠标移动的横纵坐标
+            // 可视区域的横坐标
+            my$("im").style.left =e.clientX + getScroll().left + "px";
+            // 可视区域的纵坐标
+            my$("im").style.top =e.clientY + getScroll().top + "px";
+        }
+    </script>
+</body>
+</html>

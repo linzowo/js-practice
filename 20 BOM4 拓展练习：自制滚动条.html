@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>放大镜功能</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 150px;
+            height: 300px;
+            margin: 50px;
+            border: 1px solid #000;
+            overflow: hidden;
+            background-color: pink;
+        }
+        .box div{
+            float: left;
+        }
+        .box .text-content{
+            width: 120px;
+            background-color: #ccc;
+        }
+        .box .scroll-bar{
+            width: 28px;
+            height: 100%;
+            border: 1px solid #000;
+        }
+        .box .scroll-bar .bar {
+            display: inline-block;
+            width: 20px;
+            height: 50px;
+            border-radius: 10px;
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <div class="box" id="box">
+        <div class="text-content" id="textContent">
+            床前明月光，疑是地上霜，举头望明月，低头思故乡。
+            床前明月光，疑是地上霜，举头望明月，低头思故乡。
+            床前明月光，疑是地上霜，举头望明月，低头思故乡。
+            床前明月光，疑是地上霜，举头望明月，低头思故乡。
+            床前明月光，疑是地上霜，举头望明月，低头思故乡。
+            床前明月光，疑是地上霜，举头望明月，低头思故乡。
+            床前明月光，疑是地上霜，举头望明月，低头思故乡。
+            床前明月光，疑是地上霜，举头望明月，低头思故乡。
+            床前明月光，疑是地上霜，举头望明月，低头思故乡。
+            床前明月光，疑是地上霜，举头望明月，低头思故乡。
+            床前明月光，疑是地上霜，举头望明月，低头思故乡。
+            床前明月光，疑是地上霜，举头望明月，低头思故乡。
+            床前明月光，疑是地上霜，举头望明月，低头思故乡。
+            床前明月光，疑是地上霜，举头望明月，低头思故乡。
+            床前明月光，疑是地上霜，举头望明月，低头思故乡。
+            床前明月光，疑是地上霜，举头望明月，低头思故乡。
+            床前明月光，疑是地上霜，举头望明月，低头思故乡。
+            床前明月光，疑是地上霜，举头望明月，低头思故乡。
+        </div>
+        <div class="scroll-bar" id="scrollBar">
+            <span class="bar" id="bar"></span>
+        </div>
+    </div>
+
+    <script src="common.js"></script>
+    <script>
+        // 获取元素
+        var box = my$("box");
+        var textContent = my$("textContent");
+        var scrollBar = my$("scrollBar");
+        var bar = my$("bar");
+
+        // 获取bar与文本框的比例
+        var scale = box.offsetHeight/textContent.offsetHeight;
+        // console.log(box.offsetHeight-bar.offsetHeight);
+        console.log(box.offsetHeight);
+        console.log(textContent.offsetHeight);
+
+        // 动态设置bar的长度
+        bar.style.height = box.offsetWidth*scale + "px";
+
+        // 为bar注册鼠标按下事件
+        bar.onmousedown = function(e){
+            // 获取当前鼠标位置
+            var e = window.event || e;
+            // 将鼠标当前在bar的哪个位置记录下来
+            var spaceY = e.clientY - bar.offsetTop;
+            // 添加一个鼠标移动事件
+            document.onmousemove = function(e){
+                // 获取当前鼠标位置
+                var e = window.event || e;
+                // 设置bar的位置
+                var y = e.clientY - spaceY - 54;
+                if(y<0){
+                    y=0;
+                }else if(y>box.offsetHeight){
+                    y = box.offsetHeight-bar.offsetHeight;
+                }
+
+                bar.style.marginTop = y + "px";
+
+                // 使文章跟随bar移动
+                textContent.style.marginTop = -y/scale + "px";
+            }
+            
+        }
+        document.onmouseup = function(){
+            document.onmousemove = null;
+        }
+    </script>
+</body>
+</html>

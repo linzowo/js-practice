@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片跟随鼠标移动</title>
+
+    <style>
+        body{
+            height: 2000px;
+        }
+        img{
+            width: 200px;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <img src="images/longjuan.jpg" alt="" id="im"/>
+
+    <script>
+        // 图片跟随鼠标移动而移动
+
+        // 封装函数获取向上的卷曲值==》将其封装在一个对象中
+        var evt = {
+            getEvent:function(e){//获取事件参数对象
+                return window.event || e;
+            },
+            getClientX:function(e){//获取事件参数对象的横坐标
+                return this.getEvent(e).clientX;
+            },
+            getClientY:function(e){//获取事件参数对象的纵坐标
+                return this.getEvent(e).clientY;
+            },
+            getScrollTop:function(){//获取向上的卷曲值
+                return window.pageXOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+            },
+            getScrollLeft:function(){//获取向左的卷曲值
+                return window.pageYOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0;
+            },
+            getPageX:function(e){//获取事件参数对象在页面中的实际横坐标
+                return this.getEvent(e).pageX || this.getClientX(e) + this.getScrollLeft();
+            },
+            getPageY:function(e){//获取事件参数对象在页面中的实际纵坐标
+                return this.getEvent(e).pageY || this.getClientY(e) + this.getScrollTop();
+            }
+        };
+
+
+        // 获取图片
+        var img = document.getElementById("im");
+
+        // 注册鼠标移动事件
+        document.onmousemove = function(e){
+            // 获取鼠标的坐标
+            /* // 判断e的兼容性问题
+            e = window.event || e;
+            // 将鼠标的位置赋予给图片
+            // 横坐标
+            img.style.left = e.clientX +"px";
+            // 纵坐标
+            img.style.top = e.clientY +"px";
+            // 存在bug当页面向上卷曲超过一屏高度时时图片无法继续跟随
+            // 需要获取向上的卷曲值 */
+            
+            // 横坐标
+            img.style.left = evt.getPageX(e) +"px";
+            // 纵坐标
+            img.style.top = evt.getPageY(e) + "px";
+        }
+    </script>
+</body>
+</html>

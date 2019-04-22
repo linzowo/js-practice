@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>放大镜功能</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            margin: 50px 0 0 50px;
+            overflow: hidden;
+        }
+        .box .small{
+            float: left;
+            /* background-color: pink; */
+            position: relative;
+            border: 1px solid #000;
+            cursor: pointer;
+        }
+        .box .small .mask{
+            position: absolute;
+            margin: 0;
+            padding: 0;
+            top: 0;
+            left: 0;
+            width: 100px;
+            height: 142px;
+            opacity: .5;
+            display: none;
+            background-color: yellow;
+        }
+        .box .big{
+            float: left;
+            width: 250px;
+            height: 354px;
+            overflow: hidden;
+            border: 1px solid #000;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="small" id="small">
+            <img src="images/longjuan.jpg" width="200px" alt="" id="imSmall">
+            <div class="mask" id="mask"></div>
+        </div>    
+        <div class="big" id="big">
+            <img src="images/longjuan.jpg" alt="" id="imBig">
+        </div>
+    </div>
+    
+    <script src="common.js"></script>
+    <script>
+        // 获取元素
+        var mask =my$("mask"); 
+        var big = my$("big");
+        var imgBig = my$("imBig");
+        // 首先计算出大图移动需要放大的距离比例.大图的宽度比上小图的宽度
+        var scale = 500/200;
+        // console.log(imgSamll.style.offsetWidth);
+        // 当鼠标进入小图时显示遮挡层和大图        
+        my$("small").onmouseover = function(e){
+            big.style.display = "block";
+            mask.style.display = "block";
+            // 遮挡层随鼠标位置移动
+            // 使遮挡层随鼠标移动
+            document.onmousemove = function(e){
+                // 获取鼠标的当前位置，并计算出鼠标位于遮挡层中心的位置
+                var e = window.event || e;
+                var x = (e.clientX-50-50);
+                var y = (e.clientY-50-71);
+                // 设置遮挡层移动边界
+                if(x<0){
+                    x=0;
+                }else if(x>100){
+                    x=100;
+                }
+                if(y<0){
+                    y=0;
+                }else if(y>142){
+                    y=142;
+                }
+                mask.style.left = x +"px";
+                mask.style.top = y +"px";
+                // 使大图随着遮挡层位置移动而移动,按比例移动
+                imgBig.style.marginLeft = -x*scale + "px";
+                imgBig.style.marginTop = -y*scale + "px";
+            }
+        }
+        my$("small").onmouseout = function(){
+            big.style.display = "none";
+            mask.style.display = "none";
+            document.onmousemove = null;
+        }
+    </script>
+</body>
+</html>
