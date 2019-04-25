@@ -74,13 +74,11 @@
         var bar = my$("bar");
 
         // 获取bar与文本框的比例
-        var scale = box.offsetHeight/textContent.offsetHeight;
+        var scale = (box.offsetHeight-4)/textContent.offsetHeight;
         // console.log(box.offsetHeight-bar.offsetHeight);
-        console.log(box.offsetHeight);
-        console.log(textContent.offsetHeight);
 
         // 动态设置bar的长度
-        bar.style.height = box.offsetWidth*scale + "px";
+        bar.style.height = (box.offsetHeight-4)*scale + "px";
 
         // 为bar注册鼠标按下事件
         bar.onmousedown = function(e){
@@ -96,14 +94,16 @@
                 var y = e.clientY - spaceY - 54;
                 if(y<0){
                     y=0;
-                }else if(y>box.offsetHeight){
-                    y = box.offsetHeight-bar.offsetHeight;
+                }else if(y>(box.offsetHeight-bar.offsetHeight-4)){
+                    y = box.offsetHeight-bar.offsetHeight-4;
                 }
-
                 bar.style.marginTop = y + "px";
 
                 // 使文章跟随bar移动
                 textContent.style.marginTop = -y/scale + "px";
+
+                // 清除被选中的文字
+                window.getSelection().removeAllRanges?window.getSelection().removeAllRanges():document.getSelection().empty();
             }
             
         }

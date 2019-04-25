@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表格高亮显示</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            display: inline-block;
+            margin: 200px 0 0 300px;
+            background-color: pink;
+        
+        }
+        /* .box table{
+            cellspacing: 0;
+            cellpadding: 0;
+        } */
+        .box table thead{
+            background-color: green;
+        }
+        .box table tr{
+            margin-bottom: 10px;
+        }
+        .box table td{
+            width: 200px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box" id="box">
+        <table border="1" cellspacing = "0" cellpadding = "0";>
+            <thead>
+                <tr>
+                    <td>表头1</td>
+                    <td>表头2</td>
+                    <td>表头3</td>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // 获取元素
+        var box = document.getElementById("box");
+        var table = box.firstElementChild;
+        // console.log(table);
+
+        // 动态的为表格加入元素
+        for(var i=0;i<5;i++){
+            // 外层控制行数
+            var tr = document.createElement("tr");
+            table.children[1].appendChild(tr);
+            for(var j =0;j<3;j++){
+                // 内层控制列数
+                var td = document.createElement("td");
+                tr.appendChild(td);
+                td.innerHTML = "表体"+(i+1);
+            }
+            if((i+1)%2==0){
+                tr.style.backgroundColor = "yellow";
+            }else{
+                tr.style.backgroundColor = "red";
+            }
+        }
+
+        // 获取表体有多少行
+        var trList = table.children[1].children;
+        // 为表体每一行注册鼠标事件
+        for(var i=0;i<trList.length;i++){
+            trList[i].onmouseover = function(){//进入
+                // 获取并存储原来的颜色
+                this.setAttribute("lastColor",this.style.backgroundColor);
+                this.style.backgroundColor = "gold";
+            }
+            trList[i].onmouseout = function(){//离开
+                // 还原原来的颜色
+                this.style.backgroundColor = this.getAttribute("lastColor");
+            }
+        }
+    </script>
+</body>
+</html>
