@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>大量字符串拼接</title>
+
+    <style>
+        .box{
+            width: 300px;
+            /* height: 500px; */
+            border: 1px solid #000;
+        }
+        .box table td{
+            width: 100px;
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <table border="1">
+            <tbody>
+                <tr>
+                    <td>昵称</td>
+                    <td>评论</td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="name" class="name">
+            请输入昵称：
+            <input type="text" name="" id="nameID">
+        </div>
+        评论：
+        <textarea name="" id="commentCentent" cols="40" rows="10"></textarea>
+        <input type="button" name="" id="btn" value="提交" />
+    </div>
+
+    <script>
+        // 获取元素
+        var id = document.getElementById("nameID");
+        var commentCentent = document.getElementById("commentCentent"); 
+        var table = document.getElementsByTagName("table")[0];
+        // 为按钮注册点击事件
+        document.getElementById("btn").onclick = function(){
+            if(id.value!=""&&commentCentent.value!=""){
+                var tr = document.createElement("tr");
+                table.appendChild(tr);
+                var td1 = document.createElement("td");
+                tr.appendChild(td1);
+                td1.innerHTML = id.value;
+                
+                var td2 = document.createElement("td");
+                tr.appendChild(td2);
+                td2.innerHTML = commentCentent.value;
+            }
+        }
+    </script>
+</body>
+</html>

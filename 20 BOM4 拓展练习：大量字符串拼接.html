@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>大量字符串拼接</title>
+    <style>
+        input{
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <input type="button" id="btn" value="拼接字符串" />
+    <input type="text" name="" id="">
+    <input type="text" name="" id="">
+    <input type="text" name="" id="">
+    <input type="text" name="" id="">
+    <input type="text" name="" id="">
+    <input type="text" name="" id="">
+
+    <script>
+        /* 因为字符串具有不可变性的特点，所有在大量字符串拼接时推荐使用，数组的方式，效率相对，字符串相加的方式会更高，因为占用的空间更少。
+        但是新版浏览器以做了相关优化，能够达到基本效率一致 */
+
+        // 获取元素
+        var inputList = document.getElementsByTagName("input");
+        var str = "";
+        var strList = [];
+        // 为按钮注册点击事件
+        document.getElementById("btn").onclick = function(){
+            // 获取所有文本框内输入的内容然后拼接起来
+            for(var i=1;i<inputList.length;i++){
+                // str += inputList[i].value + "|";
+                strList.push(inputList[i].value);
+            }
+            // str += inputList[inputList.length-1].value;
+            // console.log(str);
+            console.log(strList.join("|"));
+        }
+
+    </script>
+</body>
+</html>
