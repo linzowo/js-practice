@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>闭包案例：点赞按钮</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            background-color: pink;
+            margin-top: 100px;
+            margin-left: 100px;
+        }
+        .box div{
+            float: left;
+            text-align: center;
+            margin-right: 20px;
+            height: 200px;
+            /* background-color: purple; */
+            position: relative;
+        }
+        .box div img{
+            width: 200px;
+            display: block;
+        }
+        .box div input{
+            position: absolute;
+            bottom: 0;
+        }
+    </style>
+
+
+</head>
+<body>
+    <div class="box">
+        <div>
+            <img src="images/hz1.jpg" alt=""/>
+            <input type="button" value="赞(1)" />
+        </div>
+        <div>
+            <img src="images/hz2.jpg" alt=""/>
+            <input type="button" value="赞(1)" />
+        </div>
+        <div>
+            <img src="images/hz3.jpg" alt=""/>
+            <input type="button" value="赞(1)" />
+        </div>
+        <div>
+            <img src="images/hz4.jpg" alt=""/>
+            <input type="button" value="赞(1)" />
+        </div>
+    </div>
+
+    <script>
+        // 每点一次赞,按钮上的值就加1
+
+        // 获取所有点赞按钮
+        var btnList = document.getElementsByTagName("input");
+        // console.log(btnList);
+
+        /* // 初始版.会导致后续的按钮直接在前面按钮的值后面累加
+        var n = 2;
+        // 为每个按钮注册点击事件
+        for(var i=0;i<btnList.length;i++){
+            btnList[i].onclick = function(){
+                this.value = "赞("+(n++)+")";
+            }
+        } */
+        // 进阶版:使用闭包为每个按钮缓存一个私有变量
+        /* var f1 = function(fn){
+            var n=1;
+            fn(n);
+        }
+        for(var i=0;i<btnList.length;i++){
+            f1(function(n){
+                btnList[i].onclick=function(){
+                    n++;
+                    this.value = "赞("+n+")";
+                    // console.log(n);
+                }
+            })
+        } */
+        function f1(){
+            var n =1;
+            return function(){
+                n++;
+                this.value = "赞("+n+")";
+            }
+        }
+        for(var i=0;i<btnList.length;i++){
+            btnList[i].onclick = f1();
+        }
+    </script>
+</body>
+</html>

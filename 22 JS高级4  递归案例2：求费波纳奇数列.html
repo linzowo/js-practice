@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>递归案例2：求费波纳奇数</title>
+
+</head>
+<body>
+    <script>
+        function getFib(x){
+            if(x==1 || x==2){
+                return 1;
+            }
+            return getFib(x-1)+getFib(x-2);
+        }
+        console.log(getFib(24));
+    </script>
+</body>
+</html>

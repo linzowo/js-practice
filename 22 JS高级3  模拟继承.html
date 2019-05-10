@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模拟继承的几种方式</title>
+
+</head>
+<body>
+    <script>
+        // 创建构造函数
+        // 父类构造函数
+        function Animal(name,weight,color){
+            this.name = name;
+            this.weight = weight;
+            this.color = color;
+        }
+        // 添加原型属性
+        Animal.prototype.name = "black";
+        Animal.prototype.weight = 20;
+        Animal.prototype.color = "black";
+        // 添加原型方法
+        Animal.prototype.eat = function(){
+            console.log("吃饭");
+        };
+        Animal.prototype.sleep = function(){
+            console.log("睡觉了");
+        };
+        // // 子类构造函数
+        // function Dog(){
+
+        // }
+        // // 改变原型指向
+        // Dog.prototype = new Animal("black",20,"black");
+        // Dog.prototype.play=function(){
+        //   console.log("玩球");  
+        // }
+        
+        // 借用构造函数
+        // function Dog(name,weight,color){
+        //     Animal.call(this,name,weight,color);
+        // }
+        // Dog.prototype.play=function(){
+        //   console.log("玩球");  
+        // }
+
+        // 组合继承
+        // function Dog(name,weight,color){
+        //     Animal.call(this,name,weight,color);
+        // }
+        // Dog.prototype = new Animal();
+        // Dog.prototype.play=function(){
+        //   console.log("玩球");  
+        // }
+
+        // 拷贝继承
+        // 拷贝1：指针转移
+        // var animal = new Animal("black",20,"black");
+        // var dog = animal;
+        // dog.prototype.play = function(){
+        //   console.log("玩球");  
+        // };
+        // 拷贝2：for循环
+        // 循环1
+        // var dog = {};
+        // var animal = new Animal("black",20,"black");
+        // for(var key in animal){
+        //     dog[key] = animal[key];
+        // }
+        // dog.play = function(){
+        //     console.log("玩球");
+        // }
+        // 循环2
+        var dog = {};
+        for(var key in Animal.prototype){
+            dog[key]=Animal.prototype[key];
+        }
+        // 测试
+        // var dog  = new Dog("black",20,"black");
+        console.log(dog.name);
+        console.log(dog.weight);
+        console.log(dog.color);
+        dog.eat();
+        dog.sleep();
+        dog.play();
+    </script>
+</body>
+</html>

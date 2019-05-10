@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>递归案例1：求每个位上的数字之和</title>
+
+</head>
+<body>
+    <script>
+        function getEverySum(num){
+            if(num<10){
+                return num;
+            }
+            return num%10 + getEverySum(parseInt(num/10));
+        }
+
+        var result = getEverySum(456);
+        console.log(result);
+    </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>随机小方块产生</title>
+
+    <style>
+        .map{
+            width: 800px;
+            height: 600px;
+            background-color: #ccc;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div class="map"></div>
+
+    <script>
+        // 产生随机数对象
+        (function(window){
+            // 创建一个随机数的构造函数
+            function Random(){};
+
+            // 向该构造函数的原型中添加方法
+            Random.prototype.getRandom = function(max,min){
+                return Math.floor(Math.random()*(max-min)+min);
+            };
+
+            // 将随机数的构造函数暴露给window使其在外部也能调用
+            window.Random = new Random();
+        })(window);
+
+        // 创建小方块对象
+        (function(window){
+            // 获取地图元素
+            var map = document.querySelector(".map");
+            // 创建一个小方块的构造函数
+            function Food(width,height,color){
+                this.width = width || 20;
+                this.height = height || 20;
+                this.color = color || "green";
+                // 坐标位置===随机产生
+                this.x = 0;
+                this.y = 0;
+                // 创建小方块元素
+                this.element = document.createElement("div");
+            }
+
+            // 添加一个初始化方法
+            Food.prototype.init = function(map){
+                var div = this.element;
+                div.style.width = this.width + "px";
+                div.style.height = this.height + "px";
+                div.style.backgroundColor = this.color;
+                // 要设置位置就要脱离文档流
+                div.style.position = "absolute";
+                map.appendChild(div);
+                this.render(map);
+            }
+
+            // 产生随机位置
+            Food.prototype.render = function(map){
+                // 随机产生位置
+                this.x = Random.getRandom(map.offsetWidth/this.width,0)*this.width;
+                this.y = Random.getRandom(map.offsetHeight/this.height,0)*this.height;
+                var div = this.element;
+                div.style.left = this.x+"px";
+                div.style.top = this.y+"px";
+            }
+            // 将一个食物对象暴露给window，使其能在外部直接使用
+            window.Food = Food;
+        })(window);        
+
+        var fd = new Food();
+        fd.init(document.querySelector(".map"));
+    </script>
+</body>
+</html>
