@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>向window暴露随机数对象</title>
+</head>
+<body>
+    
+
+    <script>
+        // 随机数对象,通过自调用函数创建
+        (function (window){
+            // 创建一个随机数构造函数
+            function Random(){}
+            // 向随机数对象的原型中添加方法
+            Random.prototype.getRandom = function (max,min){
+                return Math.floor(Math.random()*(max-min)+min);
+            };
+            window.Random = Random;
+        })(window);
+        
+        // 实例化该对象
+        var random = new Random();
+        // 调用该原型对象中的方法
+        console.log(random.getRandom(20,10)); 
+    </script>
+</body>
+</html>

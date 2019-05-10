@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>电影列表排序</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .box {
+        margin-left: 100px;
+        margin-top: 50px;
+        text-align: center;
+      }
+      .box thead th {
+        background-color: pink;
+        cursor: pointer;
+      }
+      .box tbody img {
+        width: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <table border="1">
+        <thead>
+          <tr>
+            <th name="src">封面</th>
+            <th name="name">名称</th>
+            <th name="actor">主演</th>
+            <th name="director">导演</th>
+            <th name="size">大小</th>
+            <th name="time">上映时间</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <img src="images/movie/1.webp" alt="" />
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script>
+      // 使用面向对象的思想
+
+      /* // 电影对象表格==============================
+        var movieArr = [
+           {
+               src:"images/movie/1.webp",
+               name:"绿皮书 Green Book",
+               actor:"维果·莫腾森",
+               director:"彼得·法雷",
+               size:"100m",
+               time:"2019-03-01"
+           },
+           {
+               src:"images/movie/2.webp",
+               name:"风中有朵雨做的云",
+               actor:"井柏然",
+               director:"娄烨",
+               size:"150m",
+               time:"2019-04-04"
+           },
+           {
+               src:"images/movie/3.webp",
+               name:"告诉蜜蜂",
+               actor:"荷丽黛·格兰杰",
+               director:"安娜贝尔·杨科尔",
+               size:"120m",
+               time:"2018-09-09"
+           },
+           {
+               src:"images/movie/4.webp",
+               name:"幸运儿彼尔",
+               actor:"Lykke-Per",
+               director:"比利·奥古斯特",
+               size:"100m",
+               time:"2018-08-30"
+           },
+           {
+               src:"images/movie/5.webp",
+               name:"飞驰人生",
+               actor:"沈腾",
+               director:"韩寒",
+               size:"115m",
+               time:"2019-02-05"
+           },
+           {
+               src:"images/movie/6.webp",
+               name:"老师·好",
+               actor:"于谦",
+               director:"张栾",
+               size:"120m",
+               time:"2019-03-22"
+           },
+           {
+               src:"images/movie/7.webp",
+               name:"流浪地球",
+               actor:"屈楚萧",
+               director:"郭帆",
+               size:"100m",
+               time:"2019-02-05"
+           },
+           {
+               src:"images/movie/8.webp",
+               name:"过春天",
+               actor:"黄尧",
+               director:"白雪",
+               size:"110m",
+               time:"2019-03-15"
+           },
+           {
+               src:"images/movie/9.webp",
+               name:"小偷家族",
+               actor:"中川雅也",
+               director:"是枝裕和",
+               size:"112m",
+               time:"2018-06-08"
+           },
+           {
+               src:"images/movie/10.webp",
+               name:"蚁人2：黄蜂女现身",
+               actor:"保罗·路德",
+               director:"佩顿·里德",
+               size:"110m",
+               time:"2018-08-24"
+           }
+       ];
+        var titleList = [
+            "src",
+            "name",
+            "actor",
+            "director",
+            "size",
+            "time",
+        ];
+
+        // 表格对象==================================
+        ((function(){
+            // 创建构造函数
+            function Tbody(row,column){
+                this.row = row || 10;
+                this.column = column || 6;
+            };
+            
+            // 添加原型方法
+            // 初始化表格
+            Tbody.prototype.init= function(tbody,movieArr,titleList){
+                // 清空tbody防止出现多余的表格
+                tbody.innerHTML= "";
+                
+                // 向表格内添加行和列
+                for(var i=0;i<this.row;i++){// 外层循环控制行数
+                    var tr = document.createElement("tr");
+                    tbody.appendChild(tr);
+                    for(var j=0;j<this.column;j++){//内层循环控制列数
+                        var td = document.createElement("td");
+                        tr.appendChild(td);
+                        // 向表格内添加内容
+                        if(j==0){// 每行的第一列用来展示封面图片
+                            var img = document.createElement("img");
+                            td.appendChild(img);
+                            img.src = movieArr[i][titleList[j]];
+                        }else{
+                            td.innerHTML = movieArr[i][titleList[j]];
+                        }
+                    }
+                }
+            };  
+
+            // 将对象暴露给window
+            window.Tbody = Tbody;
+        })());
+
+        // 排序按钮对象===============================
+        ((function(){
+            // 创建构造函数
+            function Button(btnList){//将所有按钮组成的列表传入
+                this.btnList=btnList;
+            }
+
+            // 添加原型对象方法
+            // 创建一个数组排序使用的公共函数
+            var getSortFn = function(attr){
+                // console.log(attr);
+                // 必须要先将中文转换成英文,通过在标签中设置私有属性,将英文名称存储在其中
+                return function getSort(x,y){
+                    if(x[attr]>y[attr]){
+                        return 1;
+                    }else if(x[attr]==y[attr]){
+                        return 0;
+                    }else{
+                        return -1;
+                    }
+                }
+            }
+
+            // 响应按钮点击事件的方法
+            Button.prototype.sortMovie = function(tbodyObj,tbodyEle,movieArray,titleList){
+                return function(){
+                    // 按照当前按钮的名称使用相应的排序
+                    //获取存储在标签中的私有属性获取对应的对象索引值,以便在电影对象列表中索引
+                    movieArray.sort(getSortFn(this.getAttribute("name")));
+                    // console.log(movieArray);
+                    // 刷新表格，展示排序后的内容
+                    tbodyObj.init(tbodyEle,movieArray,titleList);
+                }
+            }
+            
+            // 初始化
+            Button.prototype.init = function(tbodyObj,tbodyEle,movieArray,titleList){
+                var that = this;
+                for(var i =0;i<this.btnList.length;i++){
+                    // 注册点击事件===修改数组排序===刷新页面内容
+                    this.btnList[i].onclick = this.sortMovie(tbodyObj,tbodyEle,movieArray,titleList);
+                }
+            }
+            // 将对象暴露给window
+            window.Button = Button;
+        })());
+
+        // 主对象====================================
+        ((function(){
+            // 创建构造函数
+            function Main(tbodyEle,btnList,movieArray,titleList){
+                this.tbodyEle = tbodyEle;
+                this.tbodyObj = new Tbody();
+                this.btnObj =  new Button(btnList);
+                this.titleList = titleList;
+                this.movieArray = movieArray;
+            }
+
+            // 向原型中添加方法
+            // 初始化
+            Main.prototype.init = function(){
+                // 初始化表格,将电影加载到页面中
+                this.tbodyObj.init(this.tbodyEle,this.movieArray,this.titleList);
+                // 初始化按键 为每个按钮添加点击事件
+                this.btnObj.init(this.tbodyObj,this.tbodyEle,this.movieArray,this.titleList);
+            }
+
+            // 将对象暴露给window
+            window.Main = Main;
+        })())
+
+        // 测试
+        // 创建表格对象
+        // var tb = document.getElementsByTagName("tbody")[0];
+        // var tbody = new Tbody();
+        // tbody.init(tb,movieArr,titleList);
+        // // 排序
+        // var btnList = document.getElementsByTagName("th");
+        // var btnObj = new Button(btnList);
+        // btnObj.init(movieArr);
+        // tbody.init(tb,movieArr,titleList);
+
+        // ==============
+        var tb = document.getElementsByTagName("tbody")[0];
+        var btnList = document.getElementsByTagName("th");
+        var main = new Main(tb,btnList,movieArr,titleList);
+        main.init(); */
+
+      // ========重构=========
+      // 电影对象数组==============================
+      var movieArray = [
+        {
+          src: "images/movie/1.webp",
+          name: "绿皮书 Green Book",
+          actor: "维果·莫腾森",
+          director: "彼得·法雷",
+          size: "100m",
+          time: "2019-03-01"
+        },
+        {
+          src: "images/movie/2.webp",
+          name: "风中有朵雨做的云",
+          actor: "井柏然",
+          director: "娄烨",
+          size: "150m",
+          time: "2019-04-04"
+        },
+        {
+          src: "images/movie/3.webp",
+          name: "告诉蜜蜂",
+          actor: "荷丽黛·格兰杰",
+          director: "安娜贝尔·杨科尔",
+          size: "120m",
+          time: "2018-09-09"
+        },
+        {
+          src: "images/movie/4.webp",
+          name: "幸运儿彼尔",
+          actor: "Lykke-Per",
+          director: "比利·奥古斯特",
+          size: "100m",
+          time: "2018-08-30"
+        },
+        {
+          src: "images/movie/5.webp",
+          name: "飞驰人生",
+          actor: "沈腾",
+          director: "韩寒",
+          size: "115m",
+          time: "2019-02-05"
+        },
+        {
+          src: "images/movie/6.webp",
+          name: "老师·好",
+          actor: "于谦",
+          director: "张栾",
+          size: "120m",
+          time: "2019-03-22"
+        },
+        {
+          src: "images/movie/7.webp",
+          name: "流浪地球",
+          actor: "屈楚萧",
+          director: "郭帆",
+          size: "100m",
+          time: "2019-02-05"
+        },
+        {
+          src: "images/movie/8.webp",
+          name: "过春天",
+          actor: "黄尧",
+          director: "白雪",
+          size: "110m",
+          time: "2019-03-15"
+        },
+        {
+          src: "images/movie/9.webp",
+          name: "小偷家族",
+          actor: "中川雅也",
+          director: "是枝裕和",
+          size: "112m",
+          time: "2018-06-08"
+        },
+        {
+          src: "images/movie/10.webp",
+          name: "蚁人2：黄蜂女现身",
+          actor: "保罗·路德",
+          director: "佩顿·里德",
+          size: "110m",
+          time: "2018-08-24"
+        }
+      ];
+      // 表头索引
+      var titleList = ["src", "name", "actor", "director", "size", "time"];
+
+      // 表体对象================
+      (function() {
+        // 创建表体构造函数
+        function Tbody(row, column) {
+          this.row = row || 10;
+          this.column = column || 6;
+        }
+        // 添加原型方法
+        // 初始化方法====显示完整的tbody也就是电影列表在页面中
+        Tbody.prototype.init = function(tbodyEle, movieArray, titleList) {
+          // 清空列表
+          tbodyEle.innerHTML = "";
+          // 通过循环生成相应的行和列,并将其添加到页面中，同时加入内容
+          for (var i = 0; i < this.row; i++) {
+            //生成行
+            var tr = document.createElement("tr");
+            tbodyEle.appendChild(tr);
+            for (var j = 0; j < this.column; j++) {
+              //生成列
+              var td = document.createElement("td");
+              tr.appendChild(td);
+              // 插入内容
+              if (j == 0) {
+                //第一列展示封面图
+                var img = document.createElement("img");
+                td.appendChild(img);
+                img.src = movieArray[i][titleList[j]];
+              } else {
+                td.innerHTML = movieArray[i][titleList[j]];
+              }
+            }
+          }
+        };
+
+        // 将对象暴露给window
+        window.Tbody = Tbody;
+      })();
+
+      // 表头对象=================
+      (function() {
+        // 创建表头构造函数
+        function Thead(titleList, theadEle) {
+          this.column = 6;
+          this.titleList = titleList;
+          this.theadEle = theadEle;
+        }
+
+        // 添加原型方法
+        // 初始化==表头的每个元素添加一个私有属性，用来方便后续触发对应的排序方式
+        Thead.prototype.init = function() {
+          for (var i = 0; i < this.column; i++) {
+            this.theadEle
+              .getElementsByTagName("th")
+              [i].setAttribute("name", this.titleList[i]);
+          }
+        };
+
+        // 将该对象暴露给window
+        window.Thead = Thead;
+      })();
+
+      // 表格对象===================
+      (function() {
+        // 创建构造 函数
+        function Table(thObj, tbObj) {
+          this.thObj = thObj;
+          this.tbObj = tbObj;
+        }
+        // 私有方法
+        // 帮助数组排序的函数
+        function getFn(attr) {
+          return function getSort(x, y) {
+            if (x[attr] > y[attr]) {
+              return 1;
+            } else if (x[attr] == y[attr]) {
+              return 0;
+            } else {
+              return -1;
+            }
+          };
+        }
+        //鼠标点击事件的处理函数
+        var getClickEventFn = function(tbObj, tbodyEle, movieArray, titleList) {
+          return function onclickFn() {
+            // 根据所点击的列的name属性确定排序方式,并重新排列数组
+            movieArray.sort(getFn(this.getAttribute("name")));
+            // 根据新数组刷新表体
+            tbObj.init(tbodyEle, movieArray, titleList);
+          };
+        };
+        // 添加原型方法
+        // 初始化表格==初始化表体==初始化表头
+        Table.prototype.init = function(
+          theadEle,
+          tbodyEle,
+          movieArray,
+          titleList
+        ) {
+          // 初始化页面
+          this.tbObj.init(tbodyEle, movieArray, titleList);
+          this.thObj.init();
+          // 为每个表头添加点击排序的功能
+          this.sortMovie(theadEle, tbodyEle, movieArray, titleList);
+        };
+        // 用户点击不同表头==按照表头的信息排序==改变电影列表排序==并调用tbody的init方法刷新页面
+        Table.prototype.sortMovie = function(
+          theadEle,
+          tbodyEle,
+          movieArray,
+          titleList
+        ) {
+          // 获取表头的每一列
+          var btnList = theadEle.getElementsByTagName("th");
+          // 为每一列注册点击事件
+          for (var i = 0; i < btnList.length; i++) {
+            btnList[i].onclick = getClickEventFn(
+              this.tbObj,
+              tbodyEle,
+              movieArray,
+              titleList
+            );
+          }
+        };
+
+        // 将对象暴露给window
+        window.Table = Table;
+      })();
+
+      // 测试
+      // 获取需要的元素
+      var tbodyEle = document.getElementsByTagName("tbody")[0];
+      var theadEle = document.getElementsByTagName("thead")[0];
+
+      // 初始化表体
+      var tbObj = new Tbody();
+      var thObj = new Thead(titleList, theadEle);
+
+      // 初始化表格
+      var table = new Table(thObj, tbObj);
+      table.init(theadEle, tbodyEle, movieArray, titleList);
+      // table.sortMovie(theadEle,tbodyEle,movieArray,titleList);
+    </script>
+  </body>
+</html>

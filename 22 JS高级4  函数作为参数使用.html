@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数作为参数使用</title>
+
+</head>
+<body>
+    <script>
+        // 电影排序
+        // 字符串可以进行排序比较
+        var m1 = {
+            name:"aaa.avi",
+            size:"400m",
+            time:"2010-1-1"
+        };
+        var m2 = {
+            name:"bbb.avi",
+            size:"200m",
+            time:"2013-1-1"
+        };
+        var m3 = {
+            name:"ccc.avi",
+            size:"100m",
+            time:"2012-1-1"
+        };
+        var mArr = [m1,m2,m3];
+        // ==================================
+        /* var f1 = function(attr){
+            mArr.sort(function(x,y){
+                if(x[attr]>y[attr]){
+                    return 1;
+                }else if(x[attr]==y[attr]){
+                    return 0;
+                }else{
+                    return -1;
+                }
+            });
+            for(var i=0;i<mArr.length;i++){
+                console.log(mArr[i].name+"==="+mArr[i].size+"==="+mArr[i].time);
+            }
+        }
+        f1("time"); */
+        // ===============重构===================
+        var fn = function(attr){
+            // 函数作为返回值使用
+            return function getSort(x,y){
+                if(x[attr]>y[attr]){
+                    return 1;
+                }else if(x[attr]==y[attr]){
+                    return 0;
+                }else{
+                    return -1;
+                }
+            };
+        }
+        var ff = fn("name");
+        // 函数作为参数使用
+        mArr.sort(ff);
+        for(var i=0;i<mArr.length;i++){
+            console.log(mArr[i].name+"==="+mArr[i].size+"==="+mArr[i].time);
+        }
+    </script>
+</body>
+</html>
