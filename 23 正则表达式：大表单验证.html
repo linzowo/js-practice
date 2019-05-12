@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>判断邮箱</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-color: #999;
+        }
+        .box{
+            width: 300px;
+            height: 500px;
+            background-color: #ccc;
+            margin-top: 100px;
+            margin-left: 600px;
+            overflow: hidden;
+        }
+        .box label {
+            display: block;
+            margin-top: 20px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="box">
+        <label for="qq">QQ：<input type="text" class="qq" id="qq"></label><br>
+        <label for="phone">手机：<input type="text" class="phone" id="phone"></label><br>
+        <label for="tel">座机：<input type="text" class="tel" id="tel"></label><br>
+        <label for="email">邮箱：<input type="text" class="email" id="email"></label><br>
+        <label for="name">姓名：<input type="text" class="name" id="name"></label><br>
+    </div>
+
+    <script>
+        // 获取所以label标签列表
+        var labelList = document.getElementsByTagName("label");
+        // console.log(labelList[0].children[0]);
+        // 为每个label注册失去焦点事件
+        for(var i=0;i<labelList.length;i++){
+            labelList[i].children[0].onblur = getEventFn();
+        }
+
+        // 失去焦点时的事件处理函数
+        function getEventFn(){
+            // 判断是否符合相应的正则
+            return function eventFn(){
+                // 判断类型是什么然后得到相应的正则
+                var reg=/[]/;
+                switch(this.className){
+                    case "qq": reg=/^[1-9][0-9]{4,11}$/; break;
+                    case "phone": reg=/^[1][358][0-9][0-9]{8}|[1][47][0-7][0-9]{{8}$/; break;
+                    case "tel": reg=/^[0-9]{3,4}[-][0-9]{7,8}$/; break;
+                    case "email": reg=/^[0-9a-zA-Z._-]+[@][0-9a-zA-Z_-]+[.][a-z]{2,4}([.][a-z]{2,4})?$/; break;
+                    case "name": reg=/^[\u4E00-\u9FA5]{2,6}$/; break;
+                }
+                // console.log(reg);
+                if(reg.test(this.value)){
+                    this.style.backgroundColor = "green";
+                }else if(this.value==""){
+                    this.style.backgroundColor = "";
+                }else{
+                    this.style.backgroundColor = "red";
+                }
+            }
+            // 如果不符合就改变当前的文本框的背景颜色
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>遍历DOM树</title>
+
+</head>
+<body>
+    <h1>一级标题</h1>
+    <h2>二级标题</h2>
+    <h3>三级标题</h3>
+    <div>这是div</div>
+    <table>
+        <tr><th>这是表格th</th></tr>
+        <tr><td>这是td</td></tr>
+    </table>
+    <ul>
+        <li>这是li</li>
+        <li>这是li</li>
+        <li>这是li</li>
+        <li>这是li</li>
+    </ul>
+    <p>这是一个p</p>
+    <span>这是一个span</span>
+
+    <script>
+        // 遍历DOM树
+        // 获取根节点
+        var root = document.documentElement;
+        // root.
+        // console.log(root);
+        function getChildren(root){
+            // 获取根节点下面的子元素
+            var children = root.children;
+            for(var i=0;i<children.length;i++){
+                // 输出每个其名称
+                console.log("当前标签名：======"+children[i].nodeName);
+                // 再判断当前这个标签是否有子元素，如果有就继续调用自身，将其输出
+                children[i].children&&getChildren(children[i]);
+            }
+        }
+
+        // 测试
+        getChildren(root);
+        
+    </script>
+
+</body>
+</html>
