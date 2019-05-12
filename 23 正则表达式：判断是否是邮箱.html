@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>判断邮箱</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-color: #999;
+        }
+        .box{
+            width: 300px;
+            height: 100px;
+            background-color: #ccc;
+            margin-top: 200px;
+            margin-left: 400px;
+            padding-top: 80px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="box">
+        请输入邮箱：<input type="text" class="email" id="email">
+    </div>
+    <script>
+        // 检测邮箱框失去焦点事件
+            var email = document.getElementById("email");
+            email.onblur = function(){
+            // 检测邮箱是否符合格式===采用严格模式判断其是否完全一致
+            if(/^[0-9a-zA-Z._-]+[@][0-9a-zA-Z_-]+[.][a-z]{2,4}([.][a-z]{2,4})?$/.test(email.value)){
+                email.style.backgroundColor = "green";
+            }else if(email.value=""){
+                email.style.backgroundColor = "";
+            }else{
+                email.style.backgroundColor = "red";
+            }
+        }
+    </script>
+</body>
+</html>

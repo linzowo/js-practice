@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>判断输入是否是中文</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-color: #999;
+        }
+        .box{
+            width: 300px;
+            height: 100px;
+            background-color: #ccc;
+            margin-top: 200px;
+            margin-left: 400px;
+            padding-top: 80px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="box">
+        请输入中文姓名：<input type="text" class="chineseName" id="chineseName">
+    </div>
+    <script>
+        // 检测邮箱框失去焦点事件
+            var chineseName = document.getElementById("chineseName");
+            chineseName.onblur = function(){
+            // 检测邮箱是否符合格式===采用严格模式判断其是否完全一致
+            if(/^[\u4E00-\u9FA5]{2,6}$/.test(chineseName.value)){
+                chineseName.style.backgroundColor = "green";
+            }else if(chineseName.value==""){
+                chineseName.style.backgroundColor = "";
+            }else{
+                chineseName.style.backgroundColor = "red";
+            }
+        }
+    </script>
+</body>
+</html>

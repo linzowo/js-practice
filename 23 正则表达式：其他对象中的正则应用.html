@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>其他对象中的正则方法</title>
+</head>
+<body>
+    <script>
+        // 字符串中的正则
+        // 提取内容==============================
+        // 提取电话
+        // var str = "中国移动：10086；中国联通：10010；中国电信：10000";
+        // var strArr = str.match(/[0-9]{5}/g);
+        
+        // 提取邮箱
+        // var str = "我的邮箱是：my_qq-name@qq.com；小白的邮箱是：xiaobai_qq-name@qq.com；小李的邮箱是：xiaoli_qq-name@qq.com；";
+        // var emailArr = str.match(/([0-9a-zA-Z._-]+)([@])([0-9a-zA-Z_-]+)([.])([a-zA-Z]{2,4})(([.][a-zA-Z])?)/g);
+        // // 提取邮箱一部分
+        // // 完整邮箱
+        // console.log(emailArr);
+        // // 用户名
+        // console.log(RegExp.$1);
+        // // 域名
+        // console.log(RegExp.$3);
+        
+        
+        // 测试
+        // console.log(strArr);
+
+
+        // 替换内容===========================
+        var str = "这件商品真好，真的好到家了，怎么有这么好的东西，好就是好。";
+        console.log(str);
+        str = str.replace(/好/g,"坏");
+        console.log(str);
+
+
+    </script>
+</body>
+</html>

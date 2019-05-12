@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>浅拷贝与深拷贝</title>
+
+</head>
+<body>
+    <script>
+        // 创建对象
+        var obj1 = {
+            age:30,
+            sex:"男",
+            car:["benz","BMW","Audi"],
+            dog:{
+                name:"tom",
+                age:2,
+                sex:"母"
+            }
+        };
+
+        // 创建一个想要需要拷贝的对象
+        var obj2 = {};
+
+        // 浅拷贝===直接粗暴的拷贝，如果遇到对象的话，就只能拷贝指针，而不是真正的拷贝内容
+        // for(var key in obj1){
+        //     obj2[key]=obj1[key];
+        // }
+        // 深拷贝===每次拷贝前判断其类型是什么，如果是基本属性就直接拷贝，如果是对象就创建一个相同的对象，在依次拷贝该对象内的属性
+        function extend(obj1,obj2){
+            for(var key in obj1){
+                if(obj1[key] instanceof Array){
+                    // 创建空对象
+                    obj2[key] = [];
+                    // 调用自身拷贝对象内的内容
+                    extend(obj1[key],obj2[key]);
+                }else if(obj1[key] instanceof Object){
+                    obj2[key] = {};
+                    extend(obj1[key],obj2[key]);
+                }else{
+                    obj2[key]=obj1[key];
+                }
+            }
+        }
+
+        // 开始拷贝
+        extend(obj1,obj2);
+        // 测试
+        console.log(obj1);
+        console.log(obj2);
+        
+
+    </script>
+</body>
+</html>
