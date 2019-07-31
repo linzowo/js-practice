@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>自定义checkbox以及radio样式</title>
+    <style>
+        input {
+            display: none;
+        }
+        input+i {
+            display: inline-block;
+            background-color: #ccc;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+        input:checked+i::before{
+            content: " ";
+            display: inline-block;
+            /* background-color: blue; */
+            /* margin: 5px; */
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 5px solid blue;
+        }
+    </style>
+</head>
+<body>
+    <!-- 重点在于使用兄弟选择器进行样式设置 -->
+    <label>
+        <input type="checkbox" name="" id="">
+        <i></i>
+    </label>
+</body>
+</html>
