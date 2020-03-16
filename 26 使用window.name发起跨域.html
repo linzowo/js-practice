@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>使用window.name发起跨域请求</title>
+</head>
+<body>
+    
+
+    <script>
+        function getData(url){
+            let state = 0,
+            iframe = document.createElement("iframe"),
+            data; // 存储数据的变量
+
+            // 设置iframe相关属性
+            iframe.style.display = "none";
+            iframe.onload = function(){
+                if (state === 1) {
+                    // 获取数据并销毁iframe
+                    data = iframe.contentWindow.name;
+                    console.log(data); // 检查获取到的数据
+
+                    // 销毁
+                    iframe.contentWindow.document.write('');
+                    iframe.contentWindow.close();
+                    document.body.removeChild(iframe);
+                }else{
+                    state = 1; 
+                    iframe.contentWindow.location.href = window.location.href
+                }
+            }
+
+            // 指定要获取数据的url
+            iframe.src = url;
+            document.body.appendChild(iframe);
+        }
+
+        getData("http://api.douban.com/v2/movie/in_theaters?apikey=0b2bdeda43b5688921839c8ecb20399b&start=0&count=10")
+    </script>
+</body>
+</html>

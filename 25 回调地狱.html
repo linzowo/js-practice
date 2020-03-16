@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 声明一个函数
+      function foo(data, callback) {
+        data++;
+        callback(data);
+      }
+
+      // 回调地狱
+      foo(1, function(data) {
+        foo(data, function(data) {
+          foo(data, function(data) {
+            foo(data, function(data) {
+              foo(data, function(data) {
+                foo(data, function(data) {
+                  console.log(data); // 7
+                });
+              });
+            });
+          });
+        });
+      });
+
+      console.log(window);
+
+      // 创建一个形式上的异步操作 ===> 没有任何具体的异步操作（例如ajax，jsonp等），我们知道它是异步操作但是不知道它究竟在操作什么
+      var p = new Promise();
+
+      // 创建一个实际的异步操作
+      var p = new Promise(function() {
+        // 在这里执行一个异步操作，例如：ajax请求
+      });
+
+
+// ============================
+
+      // 为了防止我们的异步操作函数在Promise实例化过程中的执行，将其封装在一个函数中
+      function sendAjax(data) {
+        // 创建并返回一个包含实际的异步操作的Promise对象
+        return new Promise(function(resolve,reject) {
+          // 在这里执行一个异步操作，例如：ajax请求
+
+          if('ajax请求出现错误') return reject('错误内容')
+          resolve('成功之后需要用到的数据或内容')
+        });
+      }
+
+      // 接收实例对象
+      var p = sendAjax(data)
+      // 通过.then方法指定成功和失败的回调
+      p.then(function(data){
+        // 默认第一个是成功的回调
+      }, function(err){
+        // 默认第二个是失败的回调
+      })
+
+      // ========================
+      // 串联解决回调地狱问题
+      sendAjax(data)
+      .then(function(newData1){
+        // newData就是异步操作得到的数据或内容
+        // 这里用来放成功之后如何处理
+
+        // 数据处理完成后如果还需要执行嵌套的类似操作
+        return sendAjax(newData2)
+      })
+      .then(function(newData3){
+        // newData就是异步操作得到的数据或内容
+        // 这里用来放成功之后如何处理
+
+        // 数据处理完成后如果还需要执行嵌套的类似操作
+        return sendAjax(newData4)
+      })
+    </script>
+  </body>
+</html>

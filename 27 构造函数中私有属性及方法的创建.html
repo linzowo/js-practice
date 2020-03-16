@@ -1,0 +1,50 @@
+<script>
+  // 方法1：基于作用域创建
+  function Dog(name) {
+    let originalName = name; // 私有属性
+    this.name = name; // 公共属性
+
+    function privatePlay(name) {
+      // 私有方法
+      console.log(name + "在玩棒子");
+    }
+
+    this.play = function() { // 公共方法
+      console.log(this.name + "在玩球");
+    };
+
+    this.getPrivate = function(){ // 调用私有属性和方法的方法
+        console.log("这个小狗原来的名字叫" + originalName);
+        privatePlay(originalName);
+    }
+
+    this._name = function() { // 在闭包的基础上创建一个私有属性
+        return originalName;    
+    }
+  }
+
+//   测试
+let dog = new Dog('大黄');
+// 调用公共方法和属性
+console.log(dog.name); // => 大黄
+dog.play(); // => 大黄在玩球
+dog.name = "小黄";
+console.log(dog.name); // => 小黄
+
+
+// 强行调用私有属性和方法
+console.log(dog.originalName); // => undefined
+// dog.privatePlay(); // => Uncaught TypeError: dog.privatePlay is not a function
+
+// 通过公共方法调用是由属性和方法
+dog.getPrivate(); // => 这个小狗原来的名字叫大黄 && 大黄在玩棒子
+
+// 基于闭包的私有属性
+console.log(dog._name()); // => 大黄
+
+
+
+
+
+
+</script>
