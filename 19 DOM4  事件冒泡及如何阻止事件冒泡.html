@@ -51,19 +51,15 @@
         my$("dv1").onclick = function(e){
             // window.event.cancelBubble=true;
             console.log("div1===>"+e.eventPhase);
-            // console.log("div1===>");
-            // my$("dv1").onclick();
         };
         my$("dv2").onclick = function(e){
             // window.event.cancelBubble=true;
             console.log("div2===>"+e.eventPhase);
-            // console.log("div2===>");
         };
         my$("dv3").onclick = function(e){
             // window.event.cancelBubble=true;// 此方法兼容谷歌和ie8；不兼容Firefox
             e.stopPropagation();//此方法支持Firefox
             console.log("div3===>"+e.eventPhase);
-            // console.log("div3===>");
         };
         // function f1(e){
         //     console.log(this.id+"===>"+e.eventPhase);
